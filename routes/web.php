@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('insert', 'EmployeesController@insert')->name('insert-employee');
     });
 
+    Route::group(['prefix' => 'creditos'], function() {
+        Route::get('creditos', 'CreditsController@index')->name('creditos');
+    });
+
     Route::group(['prefix' => 'reporte'], function() {
         Route::get('captura', 'ReportsController@captura')->name('captura-planilla');
         Route::get('prestamos/{from?}/{to?}', 'ReportsController@prestamos')->name('reporte-prestamos');

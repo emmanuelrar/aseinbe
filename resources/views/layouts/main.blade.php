@@ -69,8 +69,8 @@
                                     <ul class="sub-menu collapse" id="products">
                                         <li><a href="{{route('captura-planilla')}}">Captura de Planilla</a></li>
                                         <li><a href="{{route('reporte-prestamos')}}">Reporte de Prestamos</a></li>
-                                        <li><a href="#">Opci&oacute;n 3</a></li>
-                                        <li><a href="#">Opci&oacute;n 4</a></li>
+                                        <!-- <li><a href="#">Opci&oacute;n 3</a></li> -->
+                                        <!-- <li><a href="#">Opci&oacute;n 4</a></li> -->
                                     </ul>
                     
                                     <li data-toggle="collapse" data-target="#setting" class="collapsed">
@@ -79,11 +79,11 @@
                                     <ul class="sub-menu collapse" id="setting">
                                     <li>Opci&oacute;n 1</li>
                                     <li>Opci&oacute;n 2</li>
-                                    <li>Opci&oacute;n 3</li>
+                                    <!-- <li>Opci&oacute;n 3</li> -->
                                     </ul>
                     
                                     <li>
-                                    <a href="#">
+                                    <a href="{{ route('creditos') }}">
                                     <i class="fa fa-money" aria-hidden="true"></i> Creditos
                                     </a>
                                     </li>
@@ -134,20 +134,16 @@
             case 'index':
                     $('#menu-content li:contains("Dashboard")').addClass('active');
                 break;
+            case 'creditos':
+                    $('#menu-content li:contains("Creditos")').addClass('active');
+                break;
             case 'captura-planilla':
                     $('#menu-content li:contains("Captura de Planilla")').parent().prev().addClass('active');
                 break;
-            case 'captura-planilla':
+            case 'reporte-prestamos':
                 $('#menu-content li:contains("Reporte de Prestamos")').parent().prev().addClass('active');
             break;
         }
-
-        // $('#menu-content li').on('click', function() {
-        //     $('#menu-content li').removeClass('active');
-        //     $(this).addClass('active');
-        //     if($(this).parent().hasClass('sub-menu'))
-        //     $(this).parent().prev().addClass('active');
-        // });
     </script>
     @stack('script')
 </body>

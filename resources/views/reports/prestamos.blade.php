@@ -38,8 +38,8 @@
                                 <td>{{$item->cedula}}</td>
                                 <td>{{$item->nombre}}</td>
                                 <td>₡ {{number_format($item->monto_cxc, 2, ',', '.')}}</td>
-                                <td>{{$item->Date}}</td>
-                                <td>{{$item->consec}}</td>
+                                <td>{{ Carbon\Carbon::parse($item->fecha)->toDateString() }}</td>
+                                <td>{{ intval($item->consec) }}</td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -57,7 +57,8 @@
 
 var table = $('#planilla').DataTable({
    "lengthChange": false,
-   "order": [[ 5, "desc" ]]
+   "order": [[ 5, "desc" ]],
+   "destroy": true   
 });
 
 $(document).ready(function() {
@@ -123,27 +124,35 @@ $(document).ready(function() {
             "firstDay": 1
         },
         "alwaysShowCalendars": true,
-        "startDate": "08/27/2017",
-        "endDate": "09/02/2017"
+        "startDate": moment().subtract(3, 'days'),
+        "endDate": moment()
     }, function(start, end, label) {
+        table.destroy();
+        $('#table-body').html('');
+
         $.ajax({
             url: '{{ route("reporte-prestamos") }}/' + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'),
             method: 'GET',
             success: function(res) {
-                $('#planilla').html('');
-
+                console.log(res);
                 $.each(res, function(index, value) {
                     $('#table-body').append('<tr>'
                         + '<td>' + value.codigo + '</td>'
                         + '<td>' + value.cedula + '</td>'
                         + '<td>' + value.nombre + '</td>'
-                        + '<td>₡ ' + value.monto_cxc + '</td>'
-                        + '<td>' + value.Date + '</td>'
-                        + '<td>' + value.consec + '</td></tr>');
+                        + '<td>₡ ' + parseFloat(value.monto_cxc).toLocaleString() + '</td>'
+                        + '<td>' + moment(value.fecha).format('DD-MM-YYYY') + '</td>'
+                        + '<td>' + parseInt(value.consec) + '</td></tr>');
                 });
-                console.log(res);           
+
+                table = $('#planilla').DataTable({
+                "lengthChange": false,
+                "order": [[ 5, "desc" ]],
+                "destroy": true
+                });
             }
         });
+
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     });
 });
