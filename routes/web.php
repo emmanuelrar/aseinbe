@@ -37,5 +37,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'reporte'], function() {
         Route::get('captura', 'ReportsController@captura')->name('captura-planilla');
         Route::get('prestamos/{from?}/{to?}', 'ReportsController@prestamos')->name('reporte-prestamos');
+        Route::get('dividendos', 'ReportsController@dividendos')->name('dividendos');
     });
 });

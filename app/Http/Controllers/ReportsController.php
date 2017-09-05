@@ -28,4 +28,16 @@ class ReportsController extends Controller
             return view('reports.prestamos', compact('prestamos'));
         }
     }
+
+    public function dividendos(Request $request) {
+        $reporte = new Kdxemp();
+
+        $dividendos = $reporte->getDividendos();
+
+        if( $request->ajax() ) {
+            return $dividendos;
+        } else {
+            return view('reports.dividendos', compact('dividendos'));
+        }
+    }
 }

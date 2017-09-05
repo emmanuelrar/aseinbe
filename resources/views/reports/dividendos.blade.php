@@ -13,7 +13,7 @@
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
-                        <b>Reporte de Prestamos</b>
+                        <b>Detalle de Dividendos</b>
                         <div id="reportrange" class="col-md-3 pull-right" style="color: darkgray; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
                             <span></span> <b class="caret"></b>
@@ -26,20 +26,20 @@
                                 <th>C&oacute;digo</th>
                                 <th>C&eacute;dula</th>
                                 <th>Nombre</th>
-                                <th>Monto Prestamo</th>
-                                <th>Fecha</th>
-                                <th>Consecutivo</th>
+                                <th>Dividendos</th>
+                                <th>Dividendos Por Pagar</th>
+                                <th>Dividendos Pagados</th>
                         </tr>
                         </thead>
                         <tbody id="table-body">
-                        @foreach($prestamos as $item)
+                        @foreach($dividendos as $item)
                         <tr>
                                 <td>{{$item->codigo}}</td>
                                 <td>{{$item->cedula}}</td>
                                 <td>{{$item->nombre}}</td>
-                                <td>₡ {{number_format($item->monto_cxc, 2, ',', '.')}}</td>
-                                <td>{{ Carbon\Carbon::parse($item->fecha)->toDateString() }}</td>
-                                <td>{{ intval($item->consec) }}</td>
+                                <td>₡ {{number_format($item->dividen, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($item->pagar, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($item->pagado, 2, ',', '.')}}</td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -131,7 +131,7 @@ $(document).ready(function() {
         $('#table-body').html('');
 
         $.ajax({
-            url: '{{ route("reporte-prestamos") }}/' + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'),
+            url: '{{ route("dividendos") }}/' + start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD'),
             method: 'GET',
             success: function(res) {
                 $.each(res, function(index, value) {
