@@ -70,15 +70,15 @@
                                         <li><a href="{{route('captura-planilla')}}">Captura de Planilla</a></li>
                                         <li><a href="{{route('reporte-prestamos')}}">Reporte de Prestamos</a></li>
                                         <li><a href="{{route('dividendos')}}">Detalle de Dividendos</a></li>
-                                        <!-- <li><a href="#">Opci&oacute;n 4</a></li> -->
+                                        <li><a href="{{route('acumulados')}}">Reporte de Acumulados</a></li>
                                     </ul>
                     
                                     <li data-toggle="collapse" data-target="#setting" class="collapsed">
-                                    <a href="#"><i class="fa fa-cog fa-lg"></i> Configuraci&oacute;n <span class="arrow"></span></a>
+                                    <a href="#"><i class="fa fa-address-card-o" aria-hidden="true"></i> Estados de Cuenta <span class="arrow"></span></a>
                                     </li>  
                                     <ul class="sub-menu collapse" id="setting">
-                                    <li>Opci&oacute;n 1</li>
-                                    <li>Opci&oacute;n 2</li>
+                                    <li><a href="{{route('detallado')}}">Estado de Cuenta Detallado</a></li>
+                                    <li><a href="{{route('resumido')}}">Estado de Cuenta Resumido</a></li>
                                     <!-- <li>Opci&oacute;n 3</li> -->
                                     </ul>
                     
@@ -138,13 +138,20 @@
                     $('#menu-content li:contains("Creditos")').addClass('active');
                 break;
             case 'dividendos':
+                    $('#menu-content li:contains("Detalle de Dividendos")').parent().prev().addClass('active');            
                     $('#menu-content li:contains("Detalle de Dividendos")').addClass('active');
                 break;
             case 'captura-planilla':
                     $('#menu-content li:contains("Captura de Planilla")').parent().prev().addClass('active');
+                    $('#menu-content li:contains("Captura de Planilla")').addClass('active');
                 break;
             case 'reporte-prestamos':
                 $('#menu-content li:contains("Reporte de Prestamos")').parent().prev().addClass('active');
+                    $('#menu-content li:contains("Reporte de Prestamos")').addClass('active');
+            break;
+            case 'acumulados':
+                $('#menu-content li:contains("Reporte de Acumulados")').parent().prev().addClass('active');
+                    $('#menu-content li:contains("Reporte de Acumulados")').addClass('active');
             break;
         }
     </script>

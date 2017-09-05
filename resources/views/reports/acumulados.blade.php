@@ -26,20 +26,22 @@
                                 <th>C&oacute;digo</th>
                                 <th>C&eacute;dula</th>
                                 <th>Nombre</th>
-                                <th>Dividendos</th>
-                                <th>Dividendos Por Pagar</th>
-                                <th>Dividendos Pagados</th>
+                                <th>Aporte Patronal</th>
+                                <th>Aporte Obrero</th>
+                                <th>Excedente Capitalizado</th>
+                                <th>Total Ahorrado</th>
                         </tr>
                         </thead>
                         <tbody id="table-body">
-                        @foreach($dividendos as $item)
+                        @foreach($acumulados as $item)
                         <tr>
                                 <td>{{$item->codigo}}</td>
                                 <td>{{$item->cedula}}</td>
                                 <td>{{$item->nombre}}</td>
-                                <td>₡ {{number_format($item->dividen_year, 2, ',', '.')}}</td>
-                                <td>₡ {{number_format($item->pagar, 2, ',', '.')}}</td>
-                                <td>₡ {{number_format($item->pagado, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($item->sal_pa, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($item->sal_ob, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($item->sal_cap, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format(($item->sal_pa + $item->sal_ob + $item->sal_cap), 2, ',', '.')}}</td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -104,7 +106,7 @@ $(document).ready(function() {
         table.destroy();
         $('#table-body').html('');
         $.ajax({
-            url: '{{ route("dividendos") }}/' + start.format('YYYY-MM-DD'),
+            url: '{{ route("acumulados") }}/' + start.format('YYYY-MM-DD'),
             method: 'GET',
             success: function(res) {
                 $.each(res, function(index, value) {
@@ -112,9 +114,10 @@ $(document).ready(function() {
                         + '<td>' + value.codigo + '</td>'
                         + '<td>' + value.cedula + '</td>'
                         + '<td>' + value.nombre + '</td>'
-                        + '<td>₡ ' + parseFloat(value.dividen_year).toLocaleString() + '</td>'
-                        + '<td>₡' + parseFloat(value.pagar).toLocaleString() + '</td>'
-                        + '<td>₡' + parseFloat(value.pagado).toLocaleString() + '</td></tr>');
+                        + '<td>₡ ' + parseFloat(value.sal_pa).toLocaleString() + '</td>'
+                        + '<td>₡' + parseFloat(value.sal_ob).toLocaleString() + '</td>'
+                        + '<td>₡' + parseFloat(value.sal_cap).toLocaleString() + '</td>'
+                        + '<td>₡' + (parseFloat(value.sal_pa) + parseFloat(value.sal_ob) + parseFloat(value.sal_cap)).toLocaleString() + '</td></tr>');
                 });
 
                 table = $('#planilla').DataTable({

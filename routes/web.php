@@ -34,9 +34,15 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('creditos', 'CreditsController@index')->name('creditos');
     });
 
+    Route::group(['prefix' => 'estados'], function() {
+        Route::get('detallado', 'AccountStatementsController@detallado')->name('detallado');
+        Route::get('resumido', 'AccountStatementsController@resumido')->name('resumido');
+    });
+
     Route::group(['prefix' => 'reporte'], function() {
         Route::get('captura', 'ReportsController@captura')->name('captura-planilla');
         Route::get('prestamos/{from?}/{to?}', 'ReportsController@prestamos')->name('reporte-prestamos');
-        Route::get('dividendos', 'ReportsController@dividendos')->name('dividendos');
+        Route::get('dividendos/{to?}', 'ReportsController@dividendos')->name('dividendos');
+        Route::get('acumulados/{to?}', 'ReportsController@acumulados')->name('acumulados');
     });
 });

@@ -41,14 +41,38 @@ class Kdxemp extends Model
         return $prestamos;
     }
 
-    public function getDividendos() {
+    public function getDividendos($toDate) {
 
-        $dividendos = Kdxemp::selectRaw('CASE empleados.liquidado WHEN 1 THEN kdxemp.dividen ELSE 0 END as pagado, CASE empleados.liquidado WHEN 0 THEN kdxemp.dividen ELSE 0 END as pagar, kdxemp.dividen, empleados.cedula, empleados.codigo, empleados.nombre, kdxemp.monto_cxc, kdxemp.fecha')
+        if($toDate === '') {
+            $to = Carbon::now();
+        } else {
+            $to = $toDate;
+        }
+
+        $dividendos = Kdxemp::selectRaw('CASE empleados.liquidado WHEN 1 THEN empleados.dividen_year ELSE 0 END as pagado, CASE empleados.liquidado WHEN 0 THEN empleados.dividen_year ELSE 0 END as pagar, empleados.dividen_year, empleados.cedula, empleados.codigo, empleados.nombre, kdxemp.fecha')
         ->join('empleados', 'empleados.codigo', 'kdxemp.codigo')
+        ->where('kdxemp.fecha', '=', $to)
         ->orderBy('kdxemp.fecha', 'DESC')
         ->groupBy('kdxemp.codigo')
         ->get();
 
         return $dividendos;
+    }
+
+    public function getAcumulados($toDate) {
+        
+        if($toDate === '') {
+            $to = Carbon::now();
+        } else {
+            $to = $toDate;
+        }
+
+        $acumulados = Kdxemp::join('empleados', 'empleados.codigo', 'kdxemp.codigo')
+        ->where('kdxemp.fecha', '=', $to)
+        ->orderBy('kdxemp.fecha', 'DESC')
+        ->groupBy('kdxemp.codigo')
+        ->get();
+
+        return $acumulados;
     }
 }
