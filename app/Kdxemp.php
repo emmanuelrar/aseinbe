@@ -75,4 +75,13 @@ class Kdxemp extends Model
 
         return $acumulados;
     }
+
+    public function getEstadoDetallado($codigo) {
+        $acumulados = Kdxemp::join('empleados', 'empleados.codigo', 'kdxemp.codigo')
+        ->orderBy('kdxemp.fecha', 'DESC')
+        ->groupBy('kdxemp.codigo')
+        ->get();
+
+        return $acumulados;
+    }
 }

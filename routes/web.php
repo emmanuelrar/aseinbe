@@ -35,8 +35,8 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'estados'], function() {
-        Route::get('detallado', 'AccountStatementsController@detallado')->name('detallado');
-        Route::get('resumido', 'AccountStatementsController@resumido')->name('resumido');
+        Route::get('detallado/{id?}', 'AccountStatementsController@detallado')->name('detallado');
+        Route::get('resumido/{id?}', 'AccountStatementsController@resumido')->name('resumido');
     });
 
     Route::group(['prefix' => 'reporte'], function() {
