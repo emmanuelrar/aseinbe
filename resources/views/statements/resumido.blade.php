@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('style')
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <style>
 .mainContent {
     padding-top: 0px !important;
@@ -23,6 +24,12 @@ select.form-control:not([size]):not([multiple])
 }
 #company-title {
         font-size: 62px;
+}
+#roboto {
+        font-family: 'Roboto';
+}
+.no-padding {
+        padding: 0 0 !important;
 }
 </style>
 @endsection
@@ -102,87 +109,87 @@ select.form-control:not([size]):not([multiple])
                 <div class="col-md-4 center text-center">
                         <p><b>Ahorro Patronal</b></p>
                         <div class="row">
-                                <div class="col-md-8 text-left">
+                                <div class="col-md-7 text-left">
                                         <span>Saldo <Au></Au>nterior: </span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
+                                </div>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                </div>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                         </div>
                 </div>
                 <div class="col-md-4 center text-center">
                         <p><b>Ahorro Obrero</b></p>
                         <div class="row">
-                                <div class="col-md-8 text-left">
+                                <div class="col-md-7 text-left">
                                         <span>Saldo <Au></Au>nterior: </span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
+                                </div>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                </div>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                         </div>
                 </div>
                 <div class="col-md-4 center text-center">
                         <p><b>Cr&eacute;ditos</b></p>
                         <div class="row">
-                                <div class="col-md-8 text-left">
+                                <div class="col-md-7 text-left">
                                         <span>Saldo <Au></Au>nterior: </span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
+                                </div>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                </div>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
+                                        <span id="roboto"><u>04-12-2018</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-3 no-padding">
+                                        <span id="roboto"><u>₡ 56.984,68</u></span>
                                 </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>04-12-2018</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>56.984,68</u></span>
-                                </div>
-                                <div class="col-md-4">
-                                        <span id="#"><u>39.454.456,24</u></span>
+                                <div class="col-md-5">
+                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
                                 </div>
                         </div>
                 </div>
@@ -190,6 +197,7 @@ select.form-control:not([size]):not([multiple])
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary print" data-dismiss="modal">Imprimir</button>
     </div>
   </div>
 </div>
