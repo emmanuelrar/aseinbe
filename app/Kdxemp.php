@@ -77,11 +77,34 @@ class Kdxemp extends Model
     }
 
     public function getEstadoDetallado($codigo) {
-        $acumulados = Kdxemp::join('empleados', 'empleados.codigo', 'kdxemp.codigo')
+        $estadoActual = Kdxemp::where('kdxemp.codigo', $codigo)
         ->orderBy('kdxemp.fecha', 'DESC')
-        ->groupBy('kdxemp.codigo')
+        ->limit(1)
         ->get();
 
-        return $acumulados;
+        $estadoAnterior = Kdxemp::where('kdxemp.codigo', $codigo)
+        ->orderBy('kdxemp.fecha', 'DESC')
+        ->offset(1)
+        ->limit(1)
+        ->get();
+
+        $empresa = Parametros::all();
+
+        $detallado = Array('actual' => $estadoActual, 'anterior' => $estadoAnterior, 'empresa' => $empresa);
+
+        return $detallado;
+    }
+
+    public function getEstadoResumido($codigo) {
+        $estado = Kdxemp::where('kdxemp.codigo', $codigo)
+        ->orderBy('kdxemp.fecha', 'DESC')
+        ->limit(1)
+        ->get();
+
+        $empresa = Parametros::all();
+
+        $resumido = Array('actual' => $estado, 'empresa' => $empresa);
+
+        return $resumido;
     }
 }

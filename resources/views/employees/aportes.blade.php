@@ -39,7 +39,10 @@ select.form-control:not([size]):not([multiple])
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
-                        <b>Estado de Cuenta Resumido</b>
+                        <b>Registro de Aportes</b>
+                        <div style="float: right;">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertModal"> Registrar Aportes <i class="fa fa-balance-scale" aria-hidden="true"></i></button>
+                        </div>
                 </div>
                 <div class="card-block">
                 <table id="employee" class="table display" cellspacing="0" width="100%">

@@ -25,7 +25,7 @@ select.form-control:not([size]):not([multiple])
 #company-title {
         font-size: 62px;
 }
-#roboto {
+.roboto {
         font-family: 'Roboto';
 }
 .no-padding {
@@ -62,7 +62,7 @@ select.form-control:not([size]):not([multiple])
                                 <td>{{$empleado->cta_banc}}</td>
                                 <td>{{$empleado->telefono}}</td>
                                 <td align="center">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalDetallado" data-empleado="{{$empleado}}"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-info detallado" data-toggle="modal" data-target="#modalDetallado" data-empleado="{{$empleado}}"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                                 </td>
                         </tr>
                         @endforeach
@@ -82,8 +82,8 @@ select.form-control:not([size]):not([multiple])
                 <h1 id="company-title" align="center"><b>A.S.E.IN.B.E</b></h1>
             </div>
             <div class="col-md-4">
-                <p>C&eacute;dula Jur&iacute;dica: <span id="cedula-juridica"></span></p>
-                <p>Fecha: <span id="fecha"></span></p>
+                <p>C&eacute;dula Jur&iacute;dica: <span id="cedula_juridica"></span></p>
+                <p>Fecha: <span id="fecha">{{ Carbon\Carbon::now()}}</span></p>
             </div>
         </div>
         <div class="row">
@@ -91,18 +91,18 @@ select.form-control:not([size]):not([multiple])
         </div>
         <div class="row">
                 <div class="col-md-6">
-                        <p>Nombre: <span id="nombre"></span></p>
+                        <p>Nombre: <u><span id="nombre"></span></u></p>
                 </div>
                 <div class="col-md-3">
-                        <p>C&eacute;dula: <span id="cedula"></span></p>
+                        <p>C&eacute;dula: <u><span id="cedula"></span></u></p>
                 </div>
                 <div class="col-md-3">
-                        <p>Socio N°: <span id="codigo"></span></p>
+                        <p>Socio N°: <u><span id="codigo"></span></u></p>
                 </div>
         </div>
         <div class="row">
                 <div class="col-md-12">
-                        <p>Saldo Dividendos Capitalizados: <span id="sal_cap"></span></p>
+                        <p>Saldo Dividendos Capitalizados: <u><span id="sal_cap" class="roboto"></span></u></p>
                 </div>
         </div>
         <div class="row">
@@ -110,28 +110,28 @@ select.form-control:not([size]):not([multiple])
                         <p><b>Ahorro Patronal</b></p>
                         <div class="row">
                                 <div class="col-md-7 text-left">
-                                        <span>Saldo <Au></Au>nterior: </span>
+                                        <span>Saldo Anterior: </span>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_anterior_2"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
+                                        <u><span class="roboto" id="fecha_anterior"></span></u>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="monto_pa_anterior"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_anterior"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
+                                        <u><span class="roboto" id="fecha_actual"></span></u>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="monto_pa_actual"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_actual"></span></u>
                                 </div>
                         </div>
                 </div>
@@ -139,28 +139,26 @@ select.form-control:not([size]):not([multiple])
                         <p><b>Ahorro Obrero</b></p>
                         <div class="row">
                                 <div class="col-md-7 text-left">
-                                        <span>Saldo <Au></Au>nterior: </span>
+                                        <span>Saldo Anterior: </span>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_ob_anterior_2"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="monto_ob_anterior"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_ob_anterior"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="monto_ob_actual"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_ob_actual"></span></u>
                                 </div>
                         </div>
                 </div>
@@ -168,28 +166,28 @@ select.form-control:not([size]):not([multiple])
                         <p><b>Cr&eacute;ditos</b></p>
                         <div class="row">
                                 <div class="col-md-7 text-left">
-                                        <span>Saldo <Au></Au>nterior: </span>
+                                        <span>Saldo Anterior: </span>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_cxc_anterior_2"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
+                                        <p>Amortizaci&oacute;n: </p>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="amortizacion"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_cxc_anterior"></span></u>
                                 </div>
                                 <div class="col-md-4">
-                                        <span id="roboto"><u>04-12-2018</u></span>
+                                        <p>Credito: </p>
                                 </div>
                                 <div class="col-md-3 no-padding">
-                                        <span id="roboto"><u>₡ 56.984,68</u></span>
+                                        <u><span class="roboto" id="monto_cxc_actual"></span></u>
                                 </div>
                                 <div class="col-md-5">
-                                        <span id="roboto"><u>₡ 39.454.456,24</u></span>
+                                        <u><span class="roboto" id="saldo_cxc_actual"></span></u>
                                 </div>
                         </div>
                 </div>
@@ -226,7 +224,39 @@ $(document).ready(function() {
 function initButtons() {
 
     $('#modalDetallado').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var empleado = button.data('empleado');
 
+        $.ajax({
+                url: '{{route("detallado")}}/' + empleado.codigo,
+                method: 'GET',
+                success: function(res) {
+                        $('#cedula_juridica').text(res.empresa[0].cedula);
+                        $('#nombre').text(empleado.nombre);
+                        $('#cedula').text(empleado.cedula);
+                        $('#codigo').text(empleado.codigo);
+                        $('#sal_cap').text('₡ ' + parseFloat(res.actual[0].sal_cap).toLocaleString());
+                        $('#fecha_actual').text(moment(res.actual[0].fecha).format('DD-MM-YYYY'));
+                        $('#fecha_anterior').text(moment(res.anterior[0].fecha).format('DD-MM-YYYY'));
+                        $('#saldo_anterior_2').text('₡ ' + (parseFloat(res.anterior[0].sal_pa) - parseFloat(res.anterior[0].monto_pa)).toLocaleString());
+                        $('#saldo_anterior').text('₡ ' + parseFloat(res.anterior[0].sal_pa).toLocaleString());
+                        $('#saldo_actual').text('₡ ' + parseFloat(res.actual[0].sal_pa).toLocaleString());
+                        $('#monto_pa_actual').text('₡ ' + parseFloat(res.actual[0].monto_pa).toLocaleString());
+                        $('#monto_pa_anterior').text('₡ ' + parseFloat(res.anterior[0].monto_pa).toLocaleString());
+
+                        $('#saldo_ob_anterior_2').text('₡ ' + (parseFloat(res.anterior[0].sal_ob) - parseFloat(res.anterior[0].monto_ob)).toLocaleString());
+                        $('#saldo_ob_anterior').text('₡ ' + parseFloat(res.anterior[0].sal_ob).toLocaleString());
+                        $('#saldo_ob_actual').text('₡ ' + parseFloat(res.actual[0].sal_ob).toLocaleString());
+                        $('#monto_ob_actual').text('₡ ' + parseFloat(res.actual[0].monto_ob).toLocaleString());
+                        $('#monto_ob_anterior').text('₡ ' + parseFloat(res.anterior[0].monto_ob).toLocaleString());
+
+                        $('#saldo_cxc_anterior_2').text('₡ ' + (parseFloat(res.anterior[0].sal_cxc) + parseFloat(res.anterior[0].amortiza)).toLocaleString());
+                        $('#saldo_cxc_anterior').text('₡ ' + parseFloat(res.anterior[0].sal_cxc).toLocaleString());
+                        $('#saldo_cxc_actual').text('₡ ' + parseFloat(res.actual[0].sal_cxc).toLocaleString());
+                        $('#monto_cxc_actual').text('₡ ' + parseFloat(res.actual[0].monto_cxc).toLocaleString());
+                        $('#amortizacion').text('₡ ' + parseFloat(res.anterior[0].amortiza).toLocaleString());
+                }
+        })
     });
 }
 

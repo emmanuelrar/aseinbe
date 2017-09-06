@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('delete/{id}', 'EmployeesController@destroy');
         Route::post('update', 'EmployeesController@update')->name('update-employee');
         Route::post('insert', 'EmployeesController@insert')->name('insert-employee');
+        Route::get('aportes', 'EmployeesController@aportes')->name('aportes');
     });
 
     Route::group(['prefix' => 'creditos'], function() {

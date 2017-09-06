@@ -15,7 +15,8 @@ class EmployeesController extends Controller
     */
     public function index()
     {
-        $empleados = Empleados::all();
+        $empleados = Empleados::where('cta_banc', '!=', '')
+        ->get();
         return view('employees.dashboard', compact('empleados'));
     }
 
@@ -69,5 +70,12 @@ class EmployeesController extends Controller
         $empleado->save();
 
         return response()->json(['message' => 'success']);
+    }
+
+    public function aportes() {
+        $empleados = Empleados::where('cta_banc', '!=', '')
+        ->where('liquidado', '0')
+        ->get();
+        return view('employees.aportes', compact('empleados'));
     }
 }

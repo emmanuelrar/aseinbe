@@ -86,12 +86,14 @@
                                     <i class="fa fa-money" aria-hidden="true"></i> Creditos
                                     </a>
                                     </li>
-                    
-                                    <li>
-                                    <a href="{{route('employees')}}">
-                                    <i class="fa fa-users fa-lg"></i> Empleados
-                                    </a>
-                                    </li>
+
+                                    <li data-toggle="collapse" data-target="#employees" class="collapsed">
+                                    <a href="#"><i class="fa fa-users fa-lg" aria-hidden="true"></i> Empleados <span class="arrow"></span></a>
+                                    </li>  
+                                    <ul class="sub-menu collapse" id="employees">
+                                    <li><a href="{{route('employees')}}"> Listado </a></li>
+                                    <li><a href="{{route('aportes')}}"> Registro de Aportes </a></li>
+                                    </ul>
                                 </ul>
                         </div>
                     </div>
@@ -128,7 +130,12 @@
     <script>
         switch ('{{\Request::route()->getName()}}') {
             case 'employees':
-                    $('#menu-content li:contains("Empleados")').addClass('active');
+                    $('#menu-content li:contains("Listado")').parent().prev().addClass('active');
+                    $('#menu-content li:contains("Listado")').addClass('active');
+                break;
+            case 'aportes':
+                    $('#menu-content li:contains("Registro de Aportes")').parent().prev().addClass('active');
+                    $('#menu-content li:contains("Registro de Aportes")').addClass('active');
                 break;
             case 'index':
                     $('#menu-content li:contains("Dashboard")').addClass('active');

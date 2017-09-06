@@ -15,7 +15,8 @@ class AccountStatementsController extends Controller
         if($request->ajax()) {
             $detallado = $estado->getEstadoDetallado($codigo);        
         } else {
-            $empleados = Empleados::all();
+            $empleados = Empleados::where('cta_banc', '!=', '')
+            ->get();
             return view('statements.detallado', compact('empleados'));
         }
 
@@ -28,7 +29,8 @@ class AccountStatementsController extends Controller
         if($request->ajax()) {
             $detallado = $estado->getEstadoDetallado($codigo);        
         } else {
-            $empleados = Empleados::all();
+            $empleados = Empleados::where('cta_banc', '!=', '')
+            ->get();
             return view('statements.resumido', compact('empleados'));
         }
 
