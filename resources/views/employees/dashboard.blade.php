@@ -561,6 +561,7 @@ function initButtons() {
         } else {
         $('#editModal #liquidado').attr('checked', false);
         }
+        $('#editModal #beneficiarios').html('');
 
         $.ajax({
                 url: 'empleado/beneficiario/' + empleado.codigo,
@@ -633,7 +634,7 @@ function initButtons() {
         } else {
         $('#viewModal #liquidado').attr('checked', false);
         }
-
+        $('#viewModal #beneficiarios').html('');
         $.ajax({
                 url: 'empleado/beneficiario/' + empleado.codigo,
                 method: 'GET',
