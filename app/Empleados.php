@@ -8,5 +8,6 @@ class Empleados extends Model
 {
     protected $primaryKey = 'codigo';
     public $incrementing = false;
+    
 
 }

@@ -12,6 +12,12 @@ select.form-control:not([size]):not([multiple])
 .error {
         color: red;
 }
+.modal-lg {
+    min-width: 90vw !important;
+}
+.modal-dialog {
+        margin: 10vh 5vw !important;
+}
 </style>
 @endsection
 
@@ -32,7 +38,7 @@ select.form-control:not([size]):not([multiple])
                                 <th>Nombre</th>
                                 <th>Cédula</th>
                                 <th>Codigo</th>
-                                <th>Aporte</th>
+                                <th>Salario</th>
                                 <th>Cuenta Bancaria</th>
                                 <th>Telefono</th>
                                 <th>Acciones</th>
@@ -44,7 +50,7 @@ select.form-control:not([size]):not([multiple])
                                 <td>{{$empleado->nombre}}</td>
                                 <td>{{$empleado->cedula}}</td>
                                 <td>{{$empleado->codigo}}</td>
-                                <td>{{$empleado->ap_obrero}}</td>
+                                <td>{{$empleado->salario}}</td>
                                 <td>{{$empleado->cta_banc}}</td>
                                 <td>{{$empleado->telefono}}</td>
                                 <td align="center">
@@ -69,79 +75,105 @@ select.form-control:not([size]):not([multiple])
       </div>
       <div class="modal-body">
         <form action="{{route('update-employee')}}" id="updateForm">
-            {{ csrf_field() }}
+                {{ csrf_field() }}
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre">
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="cedula">C&eacute;dula</label>
+                                <input type="text" class="form-control" id="cedula" name="cedula" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="codigo">C&oacute;digo</label>
+                                <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="telefono">Tel&eacute;fono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" required>
+                        </div>
                 </div>
-                <div class="form-group">
-                        <label for="cedula">C&eacute;dula</label>
-                        <input type="text" class="form-control" id="cedula" name="cedula">
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="estado_civil">Estado Civil</label>
+                                <select class="form-control" id="estado_civil" name="estado_civil" required>
+                                <option>Casado</option>
+                                <option>Viudo</option>
+                                <option>Soltero</option>
+                                <option>Divorciado</option>
+                                <option>Concubino</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                                <label for="conyugue">Conyugue</label>
+                                <input type="text" class="form-control" id="conyugue" name="conyugue">
+                        </div>
+                        <div class="form-group">
+                                <label for="hijos">Numero de Hijos</label>
+                                <input type="number" class="form-control" id="hijos" name="hijos">
+                        </div>
+                        <div class="form-group">
+                                <label for="sexo">Sexo</label>
+                                <select class="form-control" id="sexo" name="sexo" required>
+                                <option>M</option>
+                                <option>F</option>
+                                </select>
+                        </div>
                 </div>
-                <div class="form-group">
-                        <label for="cta_banc">Cuenta Bancaria</label>
-                        <input type="text" class="form-control" id="cta_banc" name="cta_banc">
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="salario">Salario</label>
+                                <input type="text" class="form-control" id="salario" name="salario" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="fecha_ingreso">Fecha de ingreso</label>
+                                <input class="form-control" type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                                <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                        </div>
+                        <div class="form-group">
+                                <label for="nacionalidad">Nacionalidad</label>
+                                <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                        </div>
                 </div>
-                <div class="form-group">
-                        <label for="telefono">Tel&eacute;fono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono">
+                <div class="col-md-4">
+                        <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                        </div>
                 </div>
-                <div class="form-group">
-                        <label for="sexo">Sexo</label>
-                        <select class="form-control" id="sexo" name="sexo">
-                        <option>M</option>
-                        <option>F</option>
-                        </select>
+                <div class="col-md-8">
+                        <div class="form-group">
+                                <label for="cta_banc">Cuenta Bancaria</label>
+                                <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
+                        </div>
                 </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                <div class="col-md-12">
+                        <hr>
+                        <div class="col-md-6">
+                                <h5 align="right">Beneficiario </h5>
+                        </div>
+                        <div class="col-md-6 text-right">
+                                <div>
+                                        <button type="button" class="btn btn-primary btn-sm add-beneficiario" data-toggle="modal">Añadir Beneficiario <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+                                </div>
+                        </div>
+                        <hr>
                 </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                <div id="beneficiarios" style="width: 100%">
+                
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                        <label for="beneficiario">Beneficiario</label>
-                        <input type="text" class="form-control" id="beneficiario" name="beneficiario">
-                </div>
-                <div class="form-group">
-                        <label for="ced_bene">Cedula Beneficiario</label>
-                        <input type="text" class="form-control" id="ced_bene" name="ced_bene">
-                </div>
-                <div class="form-group">
-                        <label for="est_civil">Estado Civil</label>
-                        <select class="form-control" id="est_civil" name="est_civil">
-                        <option>Casado</option>
-                        <option>Viudo</option>
-                        <option>Soltero</option>
-                        <option>Divorciado</option>
-                        <option>Concubino</option>
-                        </select>
-                </div>
-                <div class="form-group">
-                        <label for="conyugue">Conyugue</label>
-                        <input type="text" class="form-control" id="conyugue" name="conyugue">
-                </div>
-                <div class="form-group">
-                        <label for="num_hijos">Numero de Hijos</label>
-                        <input type="number" class="form-control" id="num_hijos" name="num_hijos">
-                </div>
-                <div class="form-group">
-                        <label for="fec_naci">Fecha de nacimiento</label>
-                        <input class="form-control" type="date" id="fec_naci" name="fec_naci">
-                </div>
-            </div>
         </div>
-            <div class="form-group">
-                <input type="hidden" class="form-control" id="id" name="id">
-            </div>
         </form>
-      </div>
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary update">Modificar</button>
@@ -161,7 +193,7 @@ select.form-control:not([size]):not([multiple])
         <form action="{{route('insert-employee')}}" id="insertForm">
             {{ csrf_field() }}
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -175,41 +207,14 @@ select.form-control:not([size]):not([multiple])
                         <input type="text" class="form-control" id="codigo" name="codigo" required>
                 </div>
                 <div class="form-group">
-                        <label for="cta_banc">Cuenta Bancaria</label>
-                        <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
-                </div>
-                <div class="form-group">
                         <label for="telefono">Tel&eacute;fono</label>
                         <input type="text" class="form-control" id="telefono" name="telefono" required>
                 </div>
-                <div class="form-group">
-                        <label for="sexo">Sexo</label>
-                        <select class="form-control" id="sexo" name="sexo" required>
-                        <option>M</option>
-                        <option>F</option>
-                        </select>
-                </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
-                </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
-                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
-                        <label for="beneficiario">Beneficiario</label>
-                        <input type="text" class="form-control" id="beneficiario" name="beneficiario" required>
-                </div>
-                <div class="form-group">
-                        <label for="ced_bene">Cedula Beneficiario</label>
-                        <input type="text" class="form-control" id="ced_bene" name="ced_bene" required>
-                </div>
-                <div class="form-group">
-                        <label for="est_civil">Estado Civil</label>
-                        <select class="form-control" id="est_civil" name="est_civil" required>
+                        <label for="estado_civil">Estado Civil</label>
+                        <select class="form-control" id="estado_civil" name="estado_civil" required>
                         <option>Casado</option>
                         <option>Viudo</option>
                         <option>Soltero</option>
@@ -222,22 +227,84 @@ select.form-control:not([size]):not([multiple])
                         <input type="text" class="form-control" id="conyugue" name="conyugue">
                 </div>
                 <div class="form-group">
-                        <label for="num_hijos">Numero de Hijos</label>
-                        <input type="number" class="form-control" id="num_hijos" name="num_hijos">
+                        <label for="hijos">Numero de Hijos</label>
+                        <input type="number" class="form-control" id="hijos" name="hijos">
+                </div>
+                <div class="form-group">
+                        <label for="sexo">Sexo</label>
+                        <select class="form-control" id="sexo" name="sexo" required>
+                        <option>M</option>
+                        <option>F</option>
+                        </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                        <label for="salario">Salario</label>
+                        <input type="text" class="form-control" id="salario" name="salario" required>
                 </div>
                 <div class="form-group">
                         <label for="ingreso">Fecha de ingreso</label>
                         <input class="form-control" type="date" id="ingreso" name="ingreso" required>
                 </div>
                 <div class="form-group">
-                        <label for="fec_naci">Fecha de nacimiento</label>
-                        <input class="form-control" type="date" id="fec_naci" name="fec_naci" required>
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input class="form-control" type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </div>
+                <div class="form-group">
+                        <label for="nacionalidad">Nacionalidad</label>
+                        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                        <label for="cta_banc">Cuenta Bancaria</label>
+                        <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+                <div class="col-md-6">
+                        <h5 align="right">Beneficiario </h5>
+                </div>
+                <div class="col-md-6 text-right">
+                        <div>
+                                <button type="button" class="btn btn-primary btn-sm add-beneficiario" data-toggle="modal">Añadir Beneficiario <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+                        </div>
+                </div>
+                <hr>
+            </div>
+            <div id="beneficiarios" style="width: 100%">
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="nombre_beneficiario">Nombre</label>
+                                <input type="text" class="form-control" id="nombre_beneficiario" name="nombre_beneficiario[]">
+                        </div>
+                </div>
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="cedula_beneficiario">Cedula</label>
+                                <input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]">
+                        </div>
+                </div>
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="parentesco">Parentesco</label>
+                                <input type="text" class="form-control" id="parentesco" name="parentesco[]">
+                        </div>
                 </div>
             </div>
         </div>
-            <div class="form-group">
-                <input type="hidden" class="form-control" id="id" name="id">
-            </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -256,72 +323,90 @@ select.form-control:not([size]):not([multiple])
         <h5 class="modal-title"></h5>
       </div>
       <div class="modal-body">
+        <form action="#" id="viewForm">
+                {{ csrf_field() }}
         <div class="row">
-            <div class="col-md-6">
-            <div class="form-group">
+                <div class="col-md-4">
+                <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input readonly type="text" class="form-control" id="nombre" name="nombre">
+                </div>
+                <div class="form-group">
+                        <label for="cedula">C&eacute;dula</label>
+                        <input readonly type="text" class="form-control" id="cedula" name="cedula">
+                </div>
+                <div class="form-group">
                         <label for="codigo">C&oacute;digo</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" readonly>
-                </div>
-                <div class="form-group">
-                        <label for="nombre">Aporte Patronal</label>
-                        <input type="text" class="form-control" id="ap_patronal" name="ap_patronal" readonly>
-                </div>
-                <div class="form-group">
-                        <label for="capitalizado">Capitalizado</label>
-                        <input type="text" class="form-control" id="capitalizado" name="capitalizado" readonly>
-                </div>
-                <div class="form-group">
-                        <label for="cta_banc">Cuenta Bancaria</label>
-                        <input type="text" class="form-control" id="cta_banc" name="cta_banc" readonly>
+                        <input readonly type="text" class="form-control" id="codigo" name="codigo">
                 </div>
                 <div class="form-group">
                         <label for="telefono">Tel&eacute;fono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" readonly>
+                        <input readonly type="text" class="form-control" id="telefono" name="telefono">
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                        <label for="estado_civil">Estado Civil</label>
+                        <input readonly type="text" class="form-control" id="estado_civil" name="estado_civil">
+                </div>
+                <div class="form-group">
+                        <label for="conyugue">Conyugue</label>
+                        <input readonly type="text" class="form-control" id="conyugue" name="conyugue">
+                </div>
+                <div class="form-group">
+                        <label for="hijos">Numero de Hijos</label>
+                        <input readonly type="number" class="form-control" id="hijos" name="hijos">
                 </div>
                 <div class="form-group">
                         <label for="sexo">Sexo</label>
-                        <input type="text" class="form-control" id="sexo" name="sexo" readonly>
+                        <input readonly type="text" class="form-control" id="sexo" name="sexo">
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                        <label for="salario">Salario</label>
+                        <input readonly type="text" class="form-control" id="salario" name="salario">
+                </div>
+                <div class="form-group">
+                        <label for="fecha_ingreso">Fecha de ingreso</label>
+                        <input readonly class="form-control" type="text" id="fecha_ingreso" name="fecha_ingreso">
+                </div>
+                <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input readonly class="form-control" type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+                </div>
+                <div class="form-group">
+                        <label for="nacionalidad">Nacionalidad</label>
+                        <input readonly type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input readonly type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
                 </div>
                 <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="activo" name="activo" disabled>Activo</label>
+                        <input readonly type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
                 </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado" disabled>Liquidado</label>
                 </div>
-            </div>
-            <div class="col-md-6">
+                <div class="col-md-8">
                 <div class="form-group">
-                        <label for="beneficiario">Beneficiario</label>
-                        <input type="text" class="form-control" id="beneficiario" name="beneficiario" readonly>
+                        <label for="cta_banc">Cuenta Bancaria</label>
+                        <input readonly type="text" class="form-control" id="cta_banc" name="cta_banc">
                 </div>
-                <div class="form-group">
-                        <label for="ap_obrero">Aporte Obrero</label>
-                        <input type="text" class="form-control" id="ap_obrero" name="ap_obrero" readonly>
                 </div>
-                <div class="form-group">
-                        <label for="saldo_cxc">Saldo Prestamo</label>
-                        <input type="text" class="form-control" id="saldo_cxc" name="saldo_cxc" readonly>
+                <div class="col-md-12">
+                <hr>
+                <h5 align="center">Beneficiario </h5>
+                <hr>
                 </div>
-                <div class="form-group">
-                        <label for="num_hijos">Numero de Hijos</label>
-                        <input type="number" class="form-control" id="num_hijos" name="num_hijos" readonly>
+                <div id="beneficiarios" style="width: 100%">
+                        
                 </div>
-                <div class="form-group">
-                        <label for="ingreso">Fecha de ingreso</label>
-                        <input class="form-control" type="text" id="ingreso" name="ingreso" readonly>
-                </div>
-                <div class="form-group">
-                        <label for="fec_naci">Fecha de nacimiento</label>
-                        <input class="form-control" type="text" id="fec_naci" name="fec_naci" readonly>
-                </div>
-            </div>
         </div>
-        <div class="form-group">
-                <input type="hidden" class="form-control" id="id" name="id">
+        </form>
         </div>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
@@ -338,6 +423,78 @@ $('#employee').DataTable({
    "fnDrawCallback": function() {
         initButtons();
     }
+});
+
+$(document).ready(function() {
+        $('.add-beneficiario').on('click', function() {
+                $('#beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
+                + '<input type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]"></div></div>'
+                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                + '<input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]"></div></div>'
+                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                + '<input type="text" class="form-control" id="parentesco" name="parentesco[]"></div></div>');
+        });
+
+    $('#insertModal').on('show.bs.modal', function (event) {
+
+        $('.insert').on('click', function() {
+                $('#insertForm').validate({
+                        rules: {
+                                nombre: "required",
+                                cedula: "required",
+                                cta_banc: "required",
+                                codigo: "required",
+                                telefono: "required",
+                                fecha_nacimiento: "required",
+                                fecha_ingreso: "required",
+                                hijos: "required",
+                                nacionalidad: "required",
+                                estado_civil: "required",
+                                salario: "required",
+                                sexo: "required",
+                        },
+                        messages: {
+                                nombre: "Debe introducir un nombre valido.",
+                                codigo: "Debe introducir un codigo valido.",
+                                cedula: "Debe introducir una cedula valida.",
+                                cta_banc: "Debe introducir una cuenta bancaria valida.",
+                                telefono: "Debe introducir un telefono valido.",
+                                fecha_nacimiento: "Debe introducir una fecha de nacimiento valida.",
+                                fecha_ingreso: "Debe introducir una fecha de ingreso valida.",
+                                hijos: "Debe introducir un valor valido, si no tiene hijos coloque 0.",
+                                nacionalidad: "Debe seleccionar una opcion.",
+                                salario: "Debe introducir una cedula valida.",
+                                sexo: "Debe seleccionar una opcion.",
+                        },
+                        submitHandler: function(form) {
+                                $.ajax({
+                                method: 'post',     
+                                url: 'empleado/insert',
+                                data: $(form).serialize(),
+                                success: function() {
+                                        swal(
+                                        'Registrado.',
+                                        'El registro ha sido creado.',
+                                        'success'
+                                        ).then(function () {
+                                                location.reload();
+                                        });
+                                },
+                                error: function() {
+                                        swal(
+                                        'Error.',
+                                        'Ha ocurrido un error al conectar con el servidor.',
+                                        'error'
+                                        ); 
+                                }
+                                });
+                        }
+                });
+                if($('#insertForm').valid()) {
+                        $('#insertForm').submit();
+                }
+        });
+    });
 });
 
 function initButtons() {
@@ -378,32 +535,48 @@ function initButtons() {
     $('#editModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var empleado = button.data('empleado');
-        $('#id').val(empleado.codigo);        
-        $('#nombre').val(empleado.nombre);
-        $('#cedula').val(empleado.cedula);
-        $('#cta_banc').val(empleado.cta_banc);
-        $('#telefono').val(empleado.telefono);
-        $('#fec_naci').val(empleado.fec_naci);
-        $('#num_hijos').val(empleado.num_hijos);
-        $('#conyugue').val(empleado.conyugue);
-        $('#est_civil').val(empleado.est_civil);
-        $('#beneficiario').val(empleado.beneficiario);
-        $('#ced_bene').val(empleado.ced_bene);
-        $('#sexo').val(empleado.sexo);
-        $('#activo').val(empleado.activo);
-        $('#liquidado').val(empleado.liquidado);
-
+        $('.modal-title').text(empleado.nombre);
+        $('#editModal #nombre').val(empleado.nombre);
+        $('#editModal #cedula').val(empleado.cedula);
+        $('#editModal #salario').val(parseFloat(empleado.salario).toFixed(0));
+        $('#editModal #codigo').val(empleado.codigo);
+        $('#editModal #cta_banc').val(empleado.cta_banc);
+        $('#editModal #telefono').val(empleado.telefono);
+        $('#editModal #fecha_nacimiento').attr('value', moment(empleado.fecha_nacimiento).format("YYYY-MM-DD"));
+        $('#editModal #fecha_ingreso').attr('value', moment(empleado.fecha_ingreso).format("YYYY-MM-DD"));
+        $('#editModal #hijos').val(empleado.hijos);
+        $('#editModal #sexo').val(empleado.sexo);
+        $('#editModal #estado_civil').val(empleado.estado_civil);
+        $('#editModal #conyugue').val(empleado.conyugue);
+        $('#editModal #activo').val(empleado.activo);
+        $('#editModal #nacionalidad').val(empleado.nacionalidad);
+        $('#editModal #liquidado').val(empleado.liquidado);
         if( empleado.activo == 1 ) {
-        $('#activo').attr('checked', true);
+        $('#editModal #activo').attr('checked', true);
         } else {
-        $('#activo').attr('checked', false);
+        $('#editModal #activo').attr('checked', false);
+        }
+        if( empleado.liquidado == 1 ) {
+        $('#editModal #liquidado').attr('checked', true);
+        } else {
+        $('#editModal #liquidado').attr('checked', false);
         }
 
-        if( empleado.liquidado == 1 ) {
-        $('#liquidado').attr('checked', true);
-        } else {
-        $('#liquidado').attr('checked', false);
-        }
+        $.ajax({
+                url: 'empleado/beneficiario/' + empleado.codigo,
+                method: 'GET',
+                success: function(data) {
+                        $.each(data, function(index, value) {
+                                $('#editModal #beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
+                                + '<input type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]" value="' + value.nombre + '"></div></div>'
+                                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                                + '<input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]" value="' + value.cedula + '"></div></div>'
+                                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                                + '<input type="text" class="form-control" id="parentesco" name="parentesco[]" value="' + value.parentesco + '"></div></div>'
+                                + '<input type="hidden" class="form-control" id="id" name="id[]" value="' + value.id + '">');
+                        });
+                }
+        });
         
         $('.update').on('click', function() {
            $.ajax({
@@ -430,86 +603,25 @@ function initButtons() {
         });
     });
 
-    $('#insertModal').on('show.bs.modal', function (event) {
-
-        $('.insert').on('click', function() {
-                $('#insertForm').validate({
-                        rules: {
-                                nombre: "required",
-                                cedula: "required",
-                                cta_banc: "required",
-                                codigo: "required",
-                                telefono: "required",
-                                fec_naci: "required",
-                                ingreso: "required",
-                                num_hijos: "required",
-                                est_civil: "required",
-                                beneficiario: "required",
-                                ced_bene: "required",
-                                sexo: "required",
-                        },
-                        messages: {
-                                nombre: "Debe introducir un nombre valido.",
-                                codigo: "Debe introducir un codigo valido.",
-                                cedula: "Debe introducir una cedula valida.",
-                                cta_banc: "Debe introducir una cuenta bancaria valida.",
-                                telefono: "Debe introducir un telefono valido.",
-                                fec_naci: "Debe introducir una fecha de nacimiento valida.",
-                                ingreso: "Debe introducir una fecha de ingreso valida.",
-                                num_hijos: "Debe introducir un valor valido, si no tiene hijos coloque 0.",
-                                est_civil: "Debe seleccionar una opcion.",
-                                beneficiario: "Debe introducir un nombre valido.",
-                                ced_bene: "Debe introducir una cedula valida.",
-                                sexo: "Debe seleccionar una opcion.",
-                        },
-                        submitHandler: function(form) {
-                                $.ajax({
-                                method: 'post',     
-                                url: 'empleado/insert',
-                                data: $(form).serialize(),
-                                success: function() {
-                                        swal(
-                                        'Registrado.',
-                                        'El registro ha sido creado.',
-                                        'success'
-                                        ).then(function () {
-                                                location.reload();
-                                        });
-                                },
-                                error: function() {
-                                        swal(
-                                        'Error.',
-                                        'Ha ocurrido un error al conectar con el servidor.',
-                                        'error'
-                                        ); 
-                                }
-                                });
-                        }
-                });
-                if($('#insertForm').valid()) {
-                        $('#insertForm').submit();
-                }
-        });
-    });
-
     $('#viewModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var empleado = button.data('empleado');
+
         $('.modal-title').text(empleado.nombre);
-        $('#viewModal #ap_patronal').val('₡ ' + parseFloat(empleado.ap_patronal).toLocaleString());
-        $('#viewModal #ap_obrero').val('₡ ' + parseFloat(empleado.ap_obrero).toLocaleString());
+        $('#viewModal #nombre').val(empleado.nombre);
+        $('#viewModal #cedula').val(empleado.cedula);
+        $('#viewModal #salario').val('₡ ' + parseFloat(empleado.salario).toLocaleString());
         $('#viewModal #codigo').val(empleado.codigo);
         $('#viewModal #cta_banc').val(empleado.cta_banc);
         $('#viewModal #telefono').val(empleado.telefono);
-        $('#viewModal #fec_naci').val(empleado.fec_naci);
-        $('#viewModal #ingreso').val(empleado.ingreso);
-        $('#viewModal #num_hijos').val(empleado.num_hijos);
-        $('#viewModal #capitalizado').val('₡ ' + parseFloat(empleado.capitalizado).toLocaleString());
-        $('#viewModal #saldo_cxc').val('₡ ' + parseFloat(empleado.saldo_cxc).toLocaleString());
-        $('#viewModal #beneficiario').val(empleado.beneficiario);
-        $('#viewModal #ced_bene').val(empleado.ced_bene);
+        $('#viewModal #fecha_nacimiento').val(moment(empleado.fecha_nacimiento).format("DD-MM-YYYY"));
+        $('#viewModal #fecha_ingreso').val(moment(empleado.fecha_ingreso).format("DD-MM-YYYY"));
+        $('#viewModal #hijos').val(empleado.hijos);
         $('#viewModal #sexo').val(empleado.sexo);
+        $('#viewModal #estado_civil').val(empleado.estado_civil);
+        $('#viewModal #conyugue').val(empleado.conyugue);
         $('#viewModal #activo').val(empleado.activo);
+        $('#viewModal #nacionalidad').val(empleado.nacionalidad);
         $('#viewModal #liquidado').val(empleado.liquidado);
         if( empleado.activo == 1 ) {
         $('#viewModal #activo').attr('checked', true);
@@ -521,6 +633,21 @@ function initButtons() {
         } else {
         $('#viewModal #liquidado').attr('checked', false);
         }
+
+        $.ajax({
+                url: 'empleado/beneficiario/' + empleado.codigo,
+                method: 'GET',
+                success: function(data) {
+                        $.each(data, function(index, value) {
+                                $('#viewModal #beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
+                                + '<input readonly type="text" class="form-control" value="' + value.nombre + '"></div></div>'
+                                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                                + '<input readonly type="text" class="form-control" value="' + value.cedula + '"></div></div>'
+                                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                                + '<input readonly type="text" class="form-control" value="' + value.parentesco + '"></div></div>');
+                        });
+                }
+        });
     });
 }
 
