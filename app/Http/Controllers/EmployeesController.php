@@ -25,7 +25,7 @@ class EmployeesController extends Controller
     }
 
     public function update(Request $request) {
-        $empleado = Empleados::find($request->input('codigo'));
+        $empleado = Empleados::find($request->input('cedula'));
 
         $empleado->nombre = $request->input('nombre');
         $empleado->cedula = $request->input('cedula');
@@ -48,10 +48,16 @@ class EmployeesController extends Controller
             for($i = 0; $i < count($request->input('nombre_beneficiario')); $i++) {
                 if(!is_null($request->input('nombre_beneficiario')) && !is_null($request->input('cedula_beneficiario')) && !is_null($request->input('parentesco'))) {
                     $beneficiario = Beneficiarios::find($request->input('id.'.$i));
-                    $beneficiario->codigo = $request->input('codigo');
+
+                    if(is_null($beneficiario)) {
+                        $beneficiario = new Beneficiarios();
+                    } 
+
+                    $beneficiario->cedula_empleado = $request->input('cedula');
                     $beneficiario->nombre = $request->input('nombre_beneficiario.'.$i);
                     $beneficiario->cedula = $request->input('cedula_beneficiario.'.$i);
                     $beneficiario->parentesco = $request->input('parentesco.'.$i);
+                    $beneficiario->porcentaje = $request->input('porcentaje.'.$i);
                     $beneficiario->save();
                 }
             }
@@ -67,7 +73,7 @@ class EmployeesController extends Controller
             for($i = 0; $i < count($request->input('nombre_beneficiario')); $i++) {
                 if(is_null($request->input('nombre_beneficiario')) && is_null($request->input('cedula_beneficiario')) && is_null($request->input('parentesco'))) {
                     $beneficiario = new Beneficiarios();        
-                    $beneficiario->codigo = $request->input('codigo');
+                    $beneficiario->cedula_empleado = $request->input('cedula');
                     $beneficiario->nombre = $request->input('nombre_beneficiario.'.$i);
                     $beneficiario->cedula = $request->input('cedula_beneficiario.'.$i);
                     $beneficiario->parentesco = $request->input('parentesco.'.$i);
@@ -96,8 +102,4 @@ class EmployeesController extends Controller
         return response()->json(['message' => 'success']);
     }
 
-    // public function aportes() {
-    //     $empleados = Empleados::all();
-    //     return view('employees.aportes', compact('empleados'));
-    // }
 }

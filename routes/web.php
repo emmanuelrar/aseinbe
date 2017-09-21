@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('insert', 'EmployeesController@insert')->name('insert-employee');
         Route::get('aportes', 'EmployeesController@aportes')->name('aportes');
         Route::get('beneficiario/{id}', 'BeneficiariosController@getBeneficiarios')->name('beneficiarios');
+        Route::get('beneficiario/eliminar/{id}', 'BeneficiariosController@destroy')->name('beneficiarios-eliminar');        
     });
 
     Route::group(['prefix' => 'creditos'], function() {

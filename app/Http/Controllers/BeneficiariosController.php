@@ -8,13 +8,22 @@ use App\Beneficiarios;
 class BeneficiariosController extends Controller
 {
     
-    public function getBeneficiarios(Request $request, $codigo) {
+    public function getBeneficiarios(Request $request, $cedula) {
 
         if($request->ajax()) {
-            $beneficiarios = Beneficiarios::where('codigo', $codigo)
+            $beneficiarios = Beneficiarios::where('cedula_empleado', $cedula)
             ->get();
 
         return $beneficiarios;
         }
+    }
+
+    public function destroy($id) {
+        $beneficiarios = Beneficiarios::where('cedula', $id)
+        ->first();
+        
+        $beneficiarios->delete();
+
+        return response()->json(['response' => 'success']);
     }
 }

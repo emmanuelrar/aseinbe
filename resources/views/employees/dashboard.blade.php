@@ -285,24 +285,7 @@ select.form-control:not([size]):not([multiple])
                 <hr>
             </div>
             <div id="beneficiarios" style="width: 100%">
-                <div class="col-md-4">
-                        <div class="form-group">
-                                <label for="nombre_beneficiario">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_beneficiario" name="nombre_beneficiario[]">
-                        </div>
-                </div>
-                <div class="col-md-4">
-                        <div class="form-group">
-                                <label for="cedula_beneficiario">Cedula</label>
-                                <input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]">
-                        </div>
-                </div>
-                <div class="col-md-4">
-                        <div class="form-group">
-                                <label for="parentesco">Parentesco</label>
-                                <input type="text" class="form-control" id="parentesco" name="parentesco[]">
-                        </div>
-                </div>
+                <!--  -->
             </div>
         </div>
         </form>
@@ -402,7 +385,7 @@ select.form-control:not([size]):not([multiple])
                 <hr>
                 </div>
                 <div id="beneficiarios" style="width: 100%">
-                        
+                        <!--  -->
                 </div>
         </div>
         </form>
@@ -418,6 +401,8 @@ select.form-control:not([size]):not([multiple])
 
 @push('script')
 <script>
+var count = 0;
+
 $('#employee').DataTable({
    "lengthChange": false,
    "fnDrawCallback": function() {
@@ -427,14 +412,23 @@ $('#employee').DataTable({
 
 $(document).ready(function() {
         $('.add-beneficiario').on('click', function() {
-                $('#beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
-                + '<input type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]"></div></div>'
-                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
-                + '<input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]"></div></div>'
-                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
-                + '<input type="text" class="form-control" id="parentesco" name="parentesco[]"></div></div>');
+                $('#insertModal #beneficiarios, #editModal #beneficiarios').append('<div id="beneficiario_' + count + '" style="width: 100%;"><div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
+                + '<input required type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]"></div></div>'
+                + '<div class="col-md-2"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                + '<input required type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]"></div></div>'
+                + '<div class="col-md-3"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                + '<input required type="text" class="form-control" id="parentesco" name="parentesco[]"></div></div><div class="col-md-2">'
+                + '<div class="form-group"><label for="porcentaje">Porcentaje</label>'
+                + '<input required type="number" class="form-control" id="porcentaje" name="porcentaje[]"></div></div>'
+                + '<div class="col-md-1" style="top: 4vh;"><button type="button" class="btn btn-danger remove" data-name="beneficiario_' + count + '"><i class="fa fa-minus" aria-hidden="true"></i></button></div></div>');
+                count++;
+
+                $('.remove').on('click', function() {
+                        $('#'+$(this).data('name')).remove();
+                });
         });
 
+    
     $('#insertModal').on('show.bs.modal', function (event) {
 
         $('.insert').on('click', function() {
@@ -452,6 +446,9 @@ $(document).ready(function() {
                                 estado_civil: "required",
                                 salario: "required",
                                 sexo: "required",
+                                'nombre_beneficiario[]':{
+                                        required: true
+                                }
                         },
                         messages: {
                                 nombre: "Debe introducir un nombre valido.",
@@ -465,6 +462,18 @@ $(document).ready(function() {
                                 nacionalidad: "Debe seleccionar una opcion.",
                                 salario: "Debe introducir una cedula valida.",
                                 sexo: "Debe seleccionar una opcion.",
+                                'nombre_beneficiario[]': {
+                                        required: "Debe introducir el nombre completo del beneficiario."
+                                },
+                                'cedula_beneficiario[]': {
+                                        required: "Debe introducir una cedula valida."
+                                },
+                                'parentesco[]': {
+                                        required: "Defina la relacion del empleado con el beneficiario."
+                                },
+                                'porcentaje[]': {
+                                        required: "Defina el porcentaje que el beneficiario recibira."
+                                },
                         },
                         submitHandler: function(form) {
                                 $.ajax({
@@ -564,17 +573,43 @@ function initButtons() {
         $('#editModal #beneficiarios').html('');
 
         $.ajax({
-                url: 'empleado/beneficiario/' + empleado.codigo,
+                url: 'empleado/beneficiario/' + empleado.cedula,
                 method: 'GET',
                 success: function(data) {
+                        count = data.length;
                         $.each(data, function(index, value) {
-                                $('#editModal #beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
-                                + '<input type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]" value="' + value.nombre + '"></div></div>'
-                                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
-                                + '<input type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]" value="' + value.cedula + '"></div></div>'
-                                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
-                                + '<input type="text" class="form-control" id="parentesco" name="parentesco[]" value="' + value.parentesco + '"></div></div>'
-                                + '<input type="hidden" class="form-control" id="id" name="id[]" value="' + value.id + '">');
+                                $('#editModal #beneficiarios').append('<div id="beneficiario_' + index + '" style="width: 100%;"><div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
+                                + '<input required type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]" value="' + value.nombre + '"></div></div>'
+                                + '<div class="col-md-2"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                                + '<input required type="text" class="form-control" id="cedula_beneficiario" name="cedula_beneficiario[]" value="' + value.cedula + '"></div></div>'
+                                + '<div class="col-md-3"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                                + '<input required type="text" class="form-control" id="parentesco" name="parentesco[]" value="' + value.parentesco + '"></div></div>'
+                                + '<input type="hidden" class="form-control" id="id" name="id[]" value="' + value.id + '"><div class="col-md-2">'
+                                + '<div class="form-group"><label for="porcentaje">Porcentaje</label>'
+                                + '<input required type="number" class="form-control" id="porcentaje" name="porcentaje[]" value="' + value.porcentaje + '"></div></div>'
+                                + '<div class="col-md-1" style="top: 4vh;"><button type="button" class="btn btn-danger delete" data-cedula="' + value.cedula + '" data-name="beneficiario_' + index + '"><i class="fa fa-minus" aria-hidden="true"></i></button></div></div></div>');
+                        });
+
+                        $('.delete').on('click', function() {
+                                var idname = '#'+$(this).data('name');
+                                var cedula = $(this).data('cedula');
+                                swal({
+                                title: '¿Estas seguro(a)?',
+                                text: "Este cambio no podra revertirse.",
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Si, deseo eliminarlo'
+                                }).then(function () {
+                                        $.ajax({
+                                                url: 'empleado/beneficiario/eliminar/' + cedula,
+                                                method: 'GET',
+                                                success: function(res) {
+                                                        $(idname).remove();                                                
+                                                }
+                                        });
+                                });
                         });
                 }
         });
@@ -636,16 +671,18 @@ function initButtons() {
         }
         $('#viewModal #beneficiarios').html('');
         $.ajax({
-                url: 'empleado/beneficiario/' + empleado.codigo,
+                url: 'empleado/beneficiario/' + empleado.cedula,
                 method: 'GET',
                 success: function(data) {
                         $.each(data, function(index, value) {
                                 $('#viewModal #beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
                                 + '<input readonly type="text" class="form-control" value="' + value.nombre + '"></div></div>'
-                                + '<div class="col-md-4"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
+                                + '<div class="col-md-3"><div class="form-group"><label for="cedula_beneficiario">Cedula</label>'
                                 + '<input readonly type="text" class="form-control" value="' + value.cedula + '"></div></div>'
-                                + '<div class="col-md-4"><div class="form-group"><label for="parentesco">Parentesco</label>'
-                                + '<input readonly type="text" class="form-control" value="' + value.parentesco + '"></div></div>');
+                                + '<div class="col-md-3"><div class="form-group"><label for="parentesco">Parentesco</label>'
+                                + '<input readonly type="text" class="form-control" value="' + value.parentesco + '"></div></div>'
+                                + '<div class="col-md-2"><div class="form-group"><label for="porcentaje">Porcentaje</label>'
+                                + '<input readonly type="text" class="form-control" id="porcentaje" name="porcentaje[]" value="' + value.porcentaje + '%"></div></div>');
                         });
                 }
         });
