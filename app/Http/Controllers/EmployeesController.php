@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Empleados;
 use App\Beneficiarios;
+use App\Saldos;
 use Carbon\Carbon;
 
 class EmployeesController extends Controller
@@ -37,10 +38,11 @@ class EmployeesController extends Controller
         $empleado->fecha_nacimiento = Carbon::parse($request->input('fecha_nacimiento'));
         $empleado->fecha_ingreso = Carbon::parse($request->input('fecha_ingreso'));
         $empleado->nacionalidad = $request->input('nacionalidad');
-        $empleado->activo = $request->input('activo') === 'on' ? '1' : '0';
-        $empleado->liquidado = $request->input('liquidado') === 'on' ? '1' : '0';
+        $empleado->activo = $request->input('activo') == '0' ? '1' : '0';
+        $empleado->liquidado = $request->input('liquidado') == '0' ? '1' : '0';
         $empleado->conyugue = $request->input('conyugue');
         $empleado->hijos = $request->input('hijos');
+        $empleado->empresa = $request->input('empresa');
         $empleado->sexo = $request->input('sexo');
         $empleado->save();
 
@@ -68,6 +70,7 @@ class EmployeesController extends Controller
 
     public function insert(Request $request) {
         $empleado = new Empleados();
+        $saldos = new Saldos();
 
         if(count($request->input('nombre_beneficiario')) > 0) {
             for($i = 0; $i < count($request->input('nombre_beneficiario')); $i++) {
@@ -92,12 +95,16 @@ class EmployeesController extends Controller
         $empleado->fecha_nacimiento = Carbon::parse($request->input('fecha_nacimiento'));
         $empleado->fecha_ingreso = Carbon::parse($request->input('fecha_ingreso'));
         $empleado->nacionalidad = $request->input('nacionalidad');
-        $empleado->activo = $request->input('activo') === 'on' ? '1' : '0';
-        $empleado->liquidado = $request->input('liquidado') === 'on' ? '1' : '0';
+        $empleado->activo = $request->input('activo') == '0' ? '1' : '0';
+        $empleado->liquidado = $request->input('liquidado') == '0' ? '1' : '0';
         $empleado->conyugue = $request->input('conyugue');
         $empleado->hijos = $request->input('hijos');
+        $empleado->empresa = $request->input('empresa');
         $empleado->sexo = $request->input('sexo');
         $empleado->save();
+
+        $saldos->cedula_empleado = $request->input('cedula');
+        $saldos->save();
 
         return response()->json(['message' => 'success']);
     }

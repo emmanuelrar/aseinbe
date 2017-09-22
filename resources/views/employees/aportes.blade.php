@@ -41,7 +41,7 @@ select.form-control:not([size]):not([multiple])
                 <div class="card-header bg-info text-white">
                         <b>Registro de Aportes</b>
                         <div style="float: right;">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertModal"> Registrar Aportes <i class="fa fa-balance-scale" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary registrar-aportes" data-toggle="modal" data-target="#insertModal"> Registrar Aportes <i class="fa fa-balance-scale" aria-hidden="true"></i></button>
                         </div>
                 </div>
                 <div class="card-block">
@@ -50,23 +50,21 @@ select.form-control:not([size]):not([multiple])
                         <tr>
                                 <th>Nombre</th>
                                 <th>Cédula</th>
-                                <th>Codigo</th>
-                                <th>Cuenta Bancaria</th>
-                                <th>Telefono</th>
-                                <th>Estado de Cuenta</th>
+                                <th>Aporte Obrero</th>
+                                <th>Aporte Patron</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($empleados as $empleado)
+                        @foreach($aportes as $aporte)
                         <tr>
-                                <td>{{$empleado->nombre}}</td>
-                                <td>{{$empleado->cedula}}</td>
-                                <td>{{$empleado->codigo}}</td>
-                                <td>{{$empleado->cta_banc}}</td>
-                                <td>{{$empleado->telefono}}</td>
-                                <td align="center">
-                                        <button type="button" class="btn btn-info detallado" data-toggle="modal" data-target="#modalResumido" data-empleado="{{$empleado}}"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
-                                </td>
+                                <td>{{$aporte->nombre}}</td>
+                                <td class="roboto">{{$aporte->cedula}}</td>
+                                <td class="roboto">₡ {{number_format($aporte->aporte_obrero, 2, ',', '.')}}</td>
+                                <td class="roboto">₡ {{number_format($aporte->aporte_patron, 2, ',', '.')}}</td>
+                                <td>{{$aporte->fecha}}</td>
+                                <td>{{$aporte->tipo}}</td>                                
                         </tr>
                         @endforeach
                         </tbody>
@@ -169,7 +167,6 @@ select.form-control:not([size]):not([multiple])
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary print" data-dismiss="modal">Imprimir</button>
       </div>
     </div>
   </div>
@@ -189,9 +186,37 @@ $('#employee').DataTable({
 
 $(document).ready(function() {
 
-        $('.print').on('click', function() {
-                printElement(document.getElementById('modalResumido'));
-                window.print();
+        $('.registrar-aportes').on('click', function() {
+                swal({
+                title: '¿Estas seguro(a)?',
+                text: "Este cambio no podra revertirse.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Registrar aportes'
+                }).then(function () {
+                        $.ajax({
+                        url: 'aportes/registrar',
+                        method: 'GET',
+                        success: function() {
+                                swal(
+                                'Aportes registrados',
+                                'Los aportes han sido cargados con exito.',
+                                'success'
+                                ).then(function () {
+                                        location.reload();
+                                });
+                        },
+                        error: function() {
+                                swal(
+                                'Error.',
+                                'Ha ocurrido un error al conectar con el servidor.',
+                                'error'
+                                ); 
+                        }
+                        });
+                });
         });
 });
 

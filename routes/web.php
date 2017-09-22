@@ -28,9 +28,17 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('delete/{id}', 'EmployeesController@destroy');
         Route::post('update', 'EmployeesController@update')->name('update-employee');
         Route::post('insert', 'EmployeesController@insert')->name('insert-employee');
-        Route::get('aportes', 'EmployeesController@aportes')->name('aportes');
         Route::get('beneficiario/{id}', 'BeneficiariosController@getBeneficiarios')->name('beneficiarios');
         Route::get('beneficiario/eliminar/{id}', 'BeneficiariosController@destroy')->name('beneficiarios-eliminar');        
+    });
+
+    Route::group(['prefix' => 'aportes'], function() {
+        Route::get('/', 'AportesController@index')->name('aportes');
+        Route::get('registrar', 'AportesController@registrarAportes')->name('registrar-aportes');
+    });
+
+    Route::group(['prefix' => 'empresas'], function() {
+        Route::get('list', 'EmpresasController@list')->name('lista-empresas');
     });
 
     Route::group(['prefix' => 'creditos'], function() {

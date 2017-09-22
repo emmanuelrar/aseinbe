@@ -117,8 +117,8 @@ select.form-control:not([size]):not([multiple])
                         <div class="form-group">
                                 <label for="sexo">Sexo</label>
                                 <select class="form-control" id="sexo" name="sexo" required>
-                                <option>M</option>
-                                <option>F</option>
+                                <option value="m">Masculino</option>
+                                <option value="f">Femenino</option>
                                 </select>
                         </div>
                 </div>
@@ -150,10 +150,18 @@ select.form-control:not([size]):not([multiple])
                                 <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
                         </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                         <div class="form-group">
                                 <label for="cta_banc">Cuenta Bancaria</label>
                                 <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
+                        </div>
+                </div>
+                <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <select class="form-control" id="empresa" name="empresa" required>
+                                <!-- Options -->
+                                </select>
                         </div>
                 </div>
                 <div class="col-md-12">
@@ -233,8 +241,8 @@ select.form-control:not([size]):not([multiple])
                 <div class="form-group">
                         <label for="sexo">Sexo</label>
                         <select class="form-control" id="sexo" name="sexo" required>
-                        <option>M</option>
-                        <option>F</option>
+                        <option value="m">Masculino</option>
+                        <option value="f">Femenino</option>
                         </select>
                 </div>
             </div>
@@ -266,12 +274,20 @@ select.form-control:not([size]):not([multiple])
                         <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="form-group">
                         <label for="cta_banc">Cuenta Bancaria</label>
                         <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
                 </div>
             </div>
+            <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <select class="form-control" id="empresa" name="empresa" required>
+                                
+                                </select>
+                        </div>
+                </div>
             <div class="col-md-12">
                 <hr>
                 <div class="col-md-6">
@@ -431,6 +447,17 @@ $(document).ready(function() {
     
     $('#insertModal').on('show.bs.modal', function (event) {
 
+        $.ajax({
+                url: 'empresas/list',
+                method: 'GET',
+                success: function(res) {
+                        $('#insertModal #empresa').html('');
+                        $.each(res, function(index, value) {
+                                $('#insertModal #empresa').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                        });
+                }
+        });
+
         $('.insert').on('click', function() {
                 $('#insertForm').validate({
                         rules: {
@@ -445,10 +472,7 @@ $(document).ready(function() {
                                 nacionalidad: "required",
                                 estado_civil: "required",
                                 salario: "required",
-                                sexo: "required",
-                                'nombre_beneficiario[]':{
-                                        required: true
-                                }
+                                sexo: "required"
                         },
                         messages: {
                                 nombre: "Debe introducir un nombre valido.",
@@ -462,6 +486,7 @@ $(document).ready(function() {
                                 nacionalidad: "Debe seleccionar una opcion.",
                                 salario: "Debe introducir una cedula valida.",
                                 sexo: "Debe seleccionar una opcion.",
+                                empresa: "Debe seleccionar una empresa.",
                                 'nombre_beneficiario[]': {
                                         required: "Debe introducir el nombre completo del beneficiario."
                                 },
@@ -542,6 +567,18 @@ function initButtons() {
     });
 
     $('#editModal').on('show.bs.modal', function (event) {
+
+        $.ajax({
+                url: 'empresas/list',
+                method: 'GET',
+                success: function(res) {
+                        $('#editModal #empresa').html('');
+                        $.each(res, function(index, value) {
+                                $('#editModal #empresa').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                        });
+                }
+        });
+
         var button = $(event.relatedTarget);
         var empleado = button.data('empleado');
         $('.modal-title').text(empleado.nombre);
@@ -559,6 +596,7 @@ function initButtons() {
         $('#editModal #conyugue').val(empleado.conyugue);
         $('#editModal #activo').val(empleado.activo);
         $('#editModal #nacionalidad').val(empleado.nacionalidad);
+        $('#editModal #empresa').val(empleado.empresa);
         $('#editModal #liquidado').val(empleado.liquidado);
         if( empleado.activo == 1 ) {
         $('#editModal #activo').attr('checked', true);
