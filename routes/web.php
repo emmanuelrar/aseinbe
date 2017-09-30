@@ -12,7 +12,7 @@
 */
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('home.home');
+        return redirect()->route('employees');
     } else {
         return view('auth.login');
     }
@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('insert', 'EmployeesController@insert')->name('insert-employee');
         Route::get('beneficiario/{id}', 'BeneficiariosController@getBeneficiarios')->name('beneficiarios');
         Route::get('beneficiario/eliminar/{id}', 'BeneficiariosController@destroy')->name('beneficiarios-eliminar');        
+        Route::get('saldos/{id}', 'SaldosController@saldos')->name('saldos-empleado');
     });
 
     Route::group(['prefix' => 'aportes'], function() {
@@ -48,6 +49,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'estados'], function() {
         Route::get('detallado/{id?}', 'AccountStatementsController@detallado')->name('detallado');
         Route::get('resumido/{id?}', 'AccountStatementsController@resumido')->name('resumido');
+    });
+
+    Route::group(['prefix' => 'configuracion'], function() {
+        Route::get('/', 'ConfiguracionController@index')->name('configuracion');
+        Route::post('update', 'ConfiguracionController@update')->name('update-configuracion');
     });
 
     Route::group(['prefix' => 'reporte'], function() {

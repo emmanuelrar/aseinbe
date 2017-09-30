@@ -18,6 +18,9 @@ select.form-control:not([size]):not([multiple])
 .modal-dialog {
         margin: 10vh 5vw !important;
 }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+        color: darkred !important;
+}
 </style>
 @endsection
 
@@ -164,7 +167,7 @@ select.form-control:not([size]):not([multiple])
                                 </select>
                         </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 hayBeneficiarios">
                         <hr>
                         <div class="col-md-6">
                                 <h5 align="right">Beneficiario </h5>
@@ -321,90 +324,125 @@ select.form-control:not([size]):not([multiple])
       <div class="modal-header">
         <h5 class="modal-title"></h5>
       </div>
-      <div class="modal-body">
-        <form action="#" id="viewForm">
-                {{ csrf_field() }}
-        <div class="row">
-                <div class="col-md-4">
-                <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input readonly type="text" class="form-control" id="nombre" name="nombre">
-                </div>
-                <div class="form-group">
-                        <label for="cedula">C&eacute;dula</label>
-                        <input readonly type="text" class="form-control" id="cedula" name="cedula">
-                </div>
-                <div class="form-group">
-                        <label for="codigo">C&oacute;digo</label>
-                        <input readonly type="text" class="form-control" id="codigo" name="codigo">
-                </div>
-                <div class="form-group">
-                        <label for="telefono">Tel&eacute;fono</label>
-                        <input readonly type="text" class="form-control" id="telefono" name="telefono">
-                </div>
-                </div>
-                <div class="col-md-4">
-                <div class="form-group">
-                        <label for="estado_civil">Estado Civil</label>
-                        <input readonly type="text" class="form-control" id="estado_civil" name="estado_civil">
-                </div>
-                <div class="form-group">
-                        <label for="conyugue">Conyugue</label>
-                        <input readonly type="text" class="form-control" id="conyugue" name="conyugue">
-                </div>
-                <div class="form-group">
-                        <label for="hijos">Numero de Hijos</label>
-                        <input readonly type="number" class="form-control" id="hijos" name="hijos">
-                </div>
-                <div class="form-group">
-                        <label for="sexo">Sexo</label>
-                        <input readonly type="text" class="form-control" id="sexo" name="sexo">
-                </div>
-                </div>
-                <div class="col-md-4">
-                <div class="form-group">
-                        <label for="salario">Salario</label>
-                        <input readonly type="text" class="form-control" id="salario" name="salario">
-                </div>
-                <div class="form-group">
-                        <label for="fecha_ingreso">Fecha de ingreso</label>
-                        <input readonly class="form-control" type="text" id="fecha_ingreso" name="fecha_ingreso">
-                </div>
-                <div class="form-group">
-                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                        <input readonly class="form-control" type="text" id="fecha_nacimiento" name="fecha_nacimiento">
-                </div>
-                <div class="form-group">
-                        <label for="nacionalidad">Nacionalidad</label>
-                        <input readonly type="text" class="form-control" id="nacionalidad" name="nacionalidad">
-                </div>
-                </div>
-                <div class="col-md-4">
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input readonly type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
-                </div>
-                <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                        <input readonly type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
-                </div>
-                </div>
-                <div class="col-md-8">
-                <div class="form-group">
-                        <label for="cta_banc">Cuenta Bancaria</label>
-                        <input readonly type="text" class="form-control" id="cta_banc" name="cta_banc">
-                </div>
-                </div>
+        <div class="modal-body">
+
+            <div class="row">
                 <div class="col-md-12">
-                <hr>
-                <h5 align="center">Beneficiario </h5>
-                <hr>
+                    <nav class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                        <a class="nav-item nav-link" id="nav-employee-tab" data-toggle="tab" href="#nav-employee" role="tab" aria-controls="nav-employee" aria-expanded="true">Información personal</a>
+                        <a class="nav-item nav-link active" id="nav-balance-tab" data-toggle="tab" href="#nav-balance" role="tab" aria-controls="nav-balance">Información financiera</a>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade" id="nav-employee" role="tabpanel" aria-labelledby="nav-employee-tab">
+                        <form action="#" id="viewForm">
+                                {{ csrf_field() }}
+
+                                <div class="row">
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input readonly type="text" class="form-control" id="nombre" name="nombre">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="cedula">C&eacute;dula</label>
+                                                <input readonly type="text" class="form-control" id="cedula" name="cedula">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="codigo">C&oacute;digo</label>
+                                                <input readonly type="text" class="form-control" id="codigo" name="codigo">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="telefono">Tel&eacute;fono</label>
+                                                <input readonly type="text" class="form-control" id="telefono" name="telefono">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label for="estado_civil">Estado Civil</label>
+                                                <input readonly type="text" class="form-control" id="estado_civil" name="estado_civil">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="conyugue">Conyugue</label>
+                                                <input readonly type="text" class="form-control" id="conyugue" name="conyugue">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="hijos">Numero de Hijos</label>
+                                                <input readonly type="number" class="form-control" id="hijos" name="hijos">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="sexo">Sexo</label>
+                                                <input readonly type="text" class="form-control" id="sexo" name="sexo">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label for="salario">Salario</label>
+                                                <input readonly type="text" class="form-control" id="salario" name="salario">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="fecha_ingreso">Fecha de ingreso</label>
+                                                <input readonly class="form-control" type="text" id="fecha_ingreso" name="fecha_ingreso">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                                                <input readonly class="form-control" type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="nacionalidad">Nacionalidad</label>
+                                                <input readonly type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                        <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                <input readonly type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                                <label class="form-check-label">
+                                                <input readonly type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                        <div class="form-group">
+                                                <label for="cta_banc">Cuenta Bancaria</label>
+                                                <input readonly type="text" class="form-control" id="cta_banc" name="cta_banc">
+                                        </div>
+                                        </div>
+                                        <div class="col-md-12 hayBeneficiarios">
+                                                <hr>
+                                                <h5 align="center">Beneficiario </h5>
+                                                <hr>
+                                        </div>
+                                        <div id="beneficiarios" style="width: 100%">
+                                                <!--  -->
+                                        </div>
+                                </div>
+                        </form>
+                        </div>
+                        <div class="tab-pane fade active" id="nav-balance" role="tabpanel" aria-labelledby="nav-balance-tab">
+                        <div class="col-md-4">
+                                <div class="form-group">
+                                                <label for="aporte_empleado">Aporte Empleado</label>
+                                                <input readonly type="text" class="form-control" id="aporte_empleado" name="aporte_empleado">
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label for="aporte_patron">Aporte Patrono</label>
+                                                <input readonly type="text" class="form-control" id="aporte_patron" name="aporte_patron">
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label for="total">Total </label>
+                                                <input readonly type="text" class="form-control" id="total" name="total">
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="beneficiarios" style="width: 100%">
-                        <!--  -->
-                </div>
-        </div>
-        </form>
+            </div>
+
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -427,6 +465,17 @@ $('#employee').DataTable({
 });
 
 $(document).ready(function() {
+
+        $('#myTab a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show');
+                
+                $('#myTab a').removeClass('active');
+                $(this).addClass('active');
+        });
+        
+        $('#myTab a:last').tab('show');
+
         $('.add-beneficiario').on('click', function() {
                 $('#insertModal #beneficiarios, #editModal #beneficiarios').append('<div id="beneficiario_' + count + '" style="width: 100%;"><div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
                 + '<input required type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]"></div></div>'
@@ -615,6 +664,7 @@ function initButtons() {
                 method: 'GET',
                 success: function(data) {
                         count = data.length;
+                        
                         $.each(data, function(index, value) {
                                 $('#editModal #beneficiarios').append('<div id="beneficiario_' + index + '" style="width: 100%;"><div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
                                 + '<input required type="text" class="form-control" id="nombre_s" name="nombre_beneficiario[]" value="' + value.nombre + '"></div></div>'
@@ -712,6 +762,12 @@ function initButtons() {
                 url: 'empleado/beneficiario/' + empleado.cedula,
                 method: 'GET',
                 success: function(data) {
+                        var count = data.length;
+                        if(count > 0) {
+                                $('#viewModal .hayBeneficiarios').css("visibility", "visible");
+                        } else {
+                                $('#viewModal .hayBeneficiarios').css("visibility", "hidden");
+                        }
                         $.each(data, function(index, value) {
                                 $('#viewModal #beneficiarios').append('<div class="col-md-4"><div class="form-group"><label for="nombre_s">Nombre</label>'
                                 + '<input readonly type="text" class="form-control" value="' + value.nombre + '"></div></div>'
@@ -722,6 +778,15 @@ function initButtons() {
                                 + '<div class="col-md-2"><div class="form-group"><label for="porcentaje">Porcentaje</label>'
                                 + '<input readonly type="text" class="form-control" id="porcentaje" name="porcentaje[]" value="' + value.porcentaje + '%"></div></div>');
                         });
+                }
+        });
+        $.ajax({
+                url: 'empleado/saldos/' + empleado.cedula,
+                method: 'GET',
+                success: function(data) {
+                        $('#viewModal #aporte_empleado').val('₡ ' + parseFloat(data[0].aporte_obrero).toLocaleString());
+                        $('#viewModal #aporte_patron').val('₡ ' + parseFloat(data[0].aporte_patron).toLocaleString());
+                        $('#viewModal #total').val('₡ ' + (parseFloat(data[0].aporte_obrero) + parseFloat(data[0].aporte_patron)).toLocaleString());                        
                 }
         });
     });

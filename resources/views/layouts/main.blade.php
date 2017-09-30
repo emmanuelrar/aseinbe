@@ -57,11 +57,13 @@
                             <div class="menu-list">
                     
                                 <ul id="menu-content" class="menu-content collapse out">
-                                    <li>
-                                    <a href="{{route('index')}}">
-                                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                                    </a>
-                                    </li>
+                                    <li data-toggle="collapse" data-target="#employees" class="collapsed">
+                                        <a href="#"><i class="fa fa-users fa-lg" aria-hidden="true"></i> Empleados <span class="arrow"></span></a>
+                                    </li>  
+                                    <ul class="sub-menu collapse" id="employees">
+                                        <li><a href="{{route('employees')}}"> Listado </a></li>
+                                        <li><a href="{{route('aportes')}}"> Registro de Aportes </a></li>
+                                    </ul>
                     
                                     <li data-toggle="collapse" data-target="#products" class="collapsed">
                                     <a href="#"><i class="fa fa-file-text fa-lg"></i> Reportes <span class="arrow"></span></a>
@@ -80,20 +82,18 @@
                                     <li><a href="{{route('detallado')}}"> Detallado </a></li>
                                     <li><a href="{{route('resumido')}}"> Resumido </a></li>
                                     </ul>
+
+                                    <li>
+                                    <a href="{{route('configuracion')}}">
+                                    <i class="fa fa-cog fa-lg"></i> Configuracion 
+                                    </a>
+                                    </li>
                     
                                     <li>
                                     <a href="{{ route('creditos') }}">
                                     <i class="fa fa-money" aria-hidden="true"></i> Creditos
                                     </a>
                                     </li>
-
-                                    <li data-toggle="collapse" data-target="#employees" class="collapsed">
-                                    <a href="#"><i class="fa fa-users fa-lg" aria-hidden="true"></i> Empleados <span class="arrow"></span></a>
-                                    </li>  
-                                    <ul class="sub-menu collapse" id="employees">
-                                    <li><a href="{{route('employees')}}"> Listado </a></li>
-                                    <li><a href="{{route('aportes')}}"> Registro de Aportes </a></li>
-                                    </ul>
                                 </ul>
                         </div>
                     </div>

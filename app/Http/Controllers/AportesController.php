@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Aportes;
 use App\Empleados;
+use App\Configuracion;
 use Carbon\Carbon;
 
 class AportesController extends Controller
@@ -18,24 +19,23 @@ class AportesController extends Controller
         ->limit($count)
         ->get();
 
-
         return view('employees.aportes', compact('aportes'));
     }
 
     public function registrarAportes(Request $request) {
         
         if($request->ajax()) {
-            $empleados = Empleados::select('empleados.cedula', 'empleados.empresa', 'empleados.salario', 'empresas.id', 'configuracion.porcen_aporte_obrero', 'configuracion.porcen_aporte_patron')
-            ->join('empresas', 'empresas.id', 'empleados.empresa')
-            ->join('configuracion', 'configuracion.id_empresa', 'empresas.id')
+            $empleados = Empleados::where('activo', '1')
             ->get();
+
+            $configuracion = Configuracion::first();
     
             for($i = 0; $i < count($empleados); $i++) {
                 $aportes = new Aportes();
                 $aportes->cedula_empleado = $empleados[$i]->cedula;
                 $aportes->fecha = Carbon::now();
-                $aportes->aporte_obrero = ($empleados[$i]->salario / 4) * ($empleados[$i]->porcen_aporte_obrero / 4) / 100;
-                $aportes->aporte_patron = ($empleados[$i]->salario / 4) * ($empleados[$i]->porcen_aporte_patron / 4) / 100;
+                $aportes->aporte_obrero = $empleados[$i]->salario * $configuracion->porcen_aporte_obrero / 100;
+                $aportes->aporte_patron = $empleados[$i]->salario * $configuracion->porcen_aporte_patron / 100;
                 $aportes->tipo = 'CT';
                 $aportes->save();
             }
