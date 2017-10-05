@@ -93,7 +93,7 @@
                                     </li>
                     
                                     <li>
-                                    <a href="{{ route('creditos') }}">
+                                    <a href="{{ route('prestamos') }}">
                                     <i class="fa fa-money" aria-hidden="true"></i> Prestamos 
                                     </a>
                                     </li>
@@ -146,8 +146,8 @@
             case 'index':
                     $('#menu-content li:contains("Estados de Cuenta")').addClass('active');
                 break;
-            case 'creditos':
-                    $('#menu-content li:contains("Creditos")').addClass('active');
+            case 'prestamos':
+                    $('#menu-content li:contains("Prestamos")').addClass('active');
                 break;
             case 'empresas':
                     $('#menu-content li:contains("Empresas")').addClass('active');

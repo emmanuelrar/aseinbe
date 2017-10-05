@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Empleados;
+use App\Prestamos;
 
-class CreditsController extends Controller
+class PrestamosController extends Controller
 {
     
     public function index() {

@@ -7,6 +7,14 @@ use App\Configuracion;
 
 class ConfiguracionController extends Controller
 {
+
+    public function list(Request $request) {
+        if($request->ajax()) {
+            $configuracion = Configuracion::first();
+            
+            return $configuracion;
+        }
+    }
     
     public function index() {
         $configuracion = Configuracion::first();

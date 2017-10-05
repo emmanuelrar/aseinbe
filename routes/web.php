@@ -52,8 +52,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('delete/{id}', 'EmpresasController@destroy')->name('delete-empresas');        
     });
 
-    Route::group(['prefix' => 'creditos'], function() {
-        Route::get('creditos', 'CreditsController@index')->name('creditos');
+    Route::group(['prefix' => 'prestamos'], function() {
+        Route::get('/', 'PrestamosController@index')->name('prestamos');
+        Route::post('insert', 'PrestamosController@insert')->name('insert-prestamos');
     });
 
     Route::group(['prefix' => 'estados'], function() {
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'configuracion'], function() {
         Route::get('/', 'ConfiguracionController@index')->name('configuracion');
+        Route::get('list', 'ConfiguracionController@list')->name('list-configuracion');
         Route::post('update', 'ConfiguracionController@update')->name('update-configuracion');
     });
 
