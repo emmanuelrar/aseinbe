@@ -38,8 +38,8 @@ class EmployeesController extends Controller
         $empleado->fecha_nacimiento = Carbon::parse($request->input('fecha_nacimiento'));
         $empleado->fecha_ingreso = Carbon::parse($request->input('fecha_ingreso'));
         $empleado->nacionalidad = $request->input('nacionalidad');
-        $empleado->activo = $request->input('activo') == '0' ? '1' : '0';
-        $empleado->liquidado = $request->input('liquidado') == '0' ? '1' : '0';
+        $empleado->activo = !is_null($request->input('activo')) ? '1' : '0';
+        $empleado->liquidado = !is_null($request->input('liquidado')) ? '1' : '0';
         $empleado->conyugue = $request->input('conyugue');
         $empleado->hijos = $request->input('hijos');
         $empleado->empresa = $request->input('empresa');
@@ -95,8 +95,8 @@ class EmployeesController extends Controller
         $empleado->fecha_nacimiento = Carbon::parse($request->input('fecha_nacimiento'));
         $empleado->fecha_ingreso = Carbon::parse($request->input('fecha_ingreso'));
         $empleado->nacionalidad = $request->input('nacionalidad');
-        $empleado->activo = $request->input('activo') == '0' ? '1' : '0';
-        $empleado->liquidado = $request->input('liquidado') == '0' ? '1' : '0';
+        $empleado->activo = $request->input('activo') == 'activo' ? '1' : '0';
+        $empleado->liquidado = $request->input('liquidado') == 'liquidado' ? '1' : '0';
         $empleado->conyugue = $request->input('conyugue');
         $empleado->hijos = $request->input('hijos');
         $empleado->empresa = $request->input('empresa');

@@ -24,10 +24,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" style="position: fixed; width: 100vw; z-index: 9;">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse" style="position: fixed; width: 100vw; z-index: 9;">
             <a class="navbar-brand" href="#">SNG</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav justify-content-end">
@@ -64,8 +61,14 @@
                                         <li><a href="{{route('employees')}}"> Listado </a></li>
                                         <li><a href="{{route('aportes')}}"> Registro de Aportes </a></li>
                                     </ul>
+
+                                    <li>
+                                    <a href="{{route('empresas')}}">
+                                    <i class="fa fa-building fa-lg"></i> Empresas 
+                                    </a>
+                                    </li>
                     
-                                    <li data-toggle="collapse" data-target="#products" class="collapsed">
+                                    <!-- <li data-toggle="collapse" data-target="#products" class="collapsed">
                                     <a href="#"><i class="fa fa-file-text fa-lg"></i> Reportes <span class="arrow"></span></a>
                                     </li>
                                     <ul class="sub-menu collapse" id="products">
@@ -81,7 +84,7 @@
                                     <ul class="sub-menu collapse" id="setting">
                                     <li><a href="{{route('detallado')}}"> Detallado </a></li>
                                     <li><a href="{{route('resumido')}}"> Resumido </a></li>
-                                    </ul>
+                                    </ul> -->
 
                                     <li>
                                     <a href="{{route('configuracion')}}">
@@ -91,7 +94,7 @@
                     
                                     <li>
                                     <a href="{{ route('creditos') }}">
-                                    <i class="fa fa-money" aria-hidden="true"></i> Creditos
+                                    <i class="fa fa-money" aria-hidden="true"></i> Prestamos 
                                     </a>
                                     </li>
                                 </ul>
@@ -145,6 +148,9 @@
                 break;
             case 'creditos':
                     $('#menu-content li:contains("Creditos")').addClass('active');
+                break;
+            case 'empresas':
+                    $('#menu-content li:contains("Empresas")').addClass('active');
                 break;
             case 'dividendos':
                     $('#menu-content li:contains("Detalle de Dividendos")').parent().prev().addClass('active');            

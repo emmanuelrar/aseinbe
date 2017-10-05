@@ -39,7 +39,12 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'empresas'], function() {
+        Route::get('/', 'EmpresasController@index')->name('empresas');
         Route::get('list', 'EmpresasController@list')->name('lista-empresas');
+        Route::get('find/{id}', 'EmpresasController@find')->name('find-empresas');
+        Route::post('insert', 'EmpresasController@insert')->name('insert-empresas');
+        Route::post('update/{id}', 'EmpresasController@update')->name('update-empresas');
+        Route::get('delete/{id}', 'EmpresasController@destroy')->name('delete-empresas');        
     });
 
     Route::group(['prefix' => 'creditos'], function() {

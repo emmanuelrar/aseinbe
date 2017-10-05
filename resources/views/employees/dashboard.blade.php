@@ -2,9 +2,6 @@
 
 @section('style')
 <style>
-.mainContent {
-    padding-top: 0px !important;
-}
 select.form-control:not([size]):not([multiple])
 {
     height: calc(3.25rem + 2px) !important;
@@ -41,7 +38,7 @@ select.form-control:not([size]):not([multiple])
                                 <th>Nombre</th>
                                 <th>Cédula</th>
                                 <th>Codigo</th>
-                                <th>Salario</th>
+                                <th>Ultimo Ingreso Semanal</th>
                                 <th>Cuenta Bancaria</th>
                                 <th>Telefono</th>
                                 <th>Acciones</th>
@@ -127,7 +124,7 @@ select.form-control:not([size]):not([multiple])
                 </div>
                 <div class="col-md-4">
                         <div class="form-group">
-                                <label for="salario">Salario</label>
+                                <label for="salario">Ultimo Ingreso Semanal</label>
                                 <input type="text" class="form-control" id="salario" name="salario" required>
                         </div>
                         <div class="form-group">
@@ -146,17 +143,25 @@ select.form-control:not([size]):not([multiple])
                 <div class="col-md-4">
                         <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                                <input type="checkbox" class="form-check-input" id="activo" value="activo" name="activo">Activo</label>
                         </div>
                         <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                                <input type="checkbox" class="form-check-input" id="liquidado" value="liquidado" name="liquidado">Liquidado</label>
                         </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                         <div class="form-group">
                                 <label for="cta_banc">Cuenta Bancaria</label>
                                 <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
+                        </div>
+                </div>
+                <div class="col-md-2">
+                        <div class="form-group">
+                                <label for="tipo_cuenta">Tipo de Cuenta</label>
+                                <select class="form-control" id="tipo_cuenta" name="tipo_cuenta" required>
+                                <!-- Options -->
+                                </select>
                         </div>
                 </div>
                 <div class="col-md-4">
@@ -244,14 +249,14 @@ select.form-control:not([size]):not([multiple])
                 <div class="form-group">
                         <label for="sexo">Sexo</label>
                         <select class="form-control" id="sexo" name="sexo" required>
-                        <option value="m">Masculino</option>
-                        <option value="f">Femenino</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
                         </select>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                        <label for="salario">Salario</label>
+                        <label for="salario">Ultimo Ingreso Semanal</label>
                         <input type="text" class="form-control" id="salario" name="salario" required>
                 </div>
                 <div class="form-group">
@@ -270,17 +275,25 @@ select.form-control:not([size]):not([multiple])
             <div class="col-md-4">
                 <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                        <input type="checkbox" class="form-check-input" id="activo" value="activo" name="activo">Activo</label>
                 </div>
                 <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                        <input type="checkbox" class="form-check-input" id="liquidado" value="liquidado" name="liquidado">Liquidado</label>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                         <label for="cta_banc">Cuenta Bancaria</label>
                         <input type="text" class="form-control" id="cta_banc" name="cta_banc" required>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                        <label for="tipo_cuenta">Tipo de Cuenta</label>
+                        <select class="form-control" id="tipo_cuenta" name="tipo_cuenta" required>
+                        <!-- Options -->
+                        </select>
                 </div>
             </div>
             <div class="col-md-4">
@@ -339,74 +352,86 @@ select.form-control:not([size]):not([multiple])
 
                                 <div class="row">
                                         <div class="col-md-4">
-                                        <div class="form-group">
-                                                <label for="nombre">Nombre</label>
-                                                <input readonly type="text" class="form-control" id="nombre" name="nombre">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="cedula">C&eacute;dula</label>
-                                                <input readonly type="text" class="form-control" id="cedula" name="cedula">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="codigo">C&oacute;digo</label>
-                                                <input readonly type="text" class="form-control" id="codigo" name="codigo">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="telefono">Tel&eacute;fono</label>
-                                                <input readonly type="text" class="form-control" id="telefono" name="telefono">
-                                        </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                        <div class="form-group">
-                                                <label for="estado_civil">Estado Civil</label>
-                                                <input readonly type="text" class="form-control" id="estado_civil" name="estado_civil">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="conyugue">Conyugue</label>
-                                                <input readonly type="text" class="form-control" id="conyugue" name="conyugue">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="hijos">Numero de Hijos</label>
-                                                <input readonly type="number" class="form-control" id="hijos" name="hijos">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="sexo">Sexo</label>
-                                                <input readonly type="text" class="form-control" id="sexo" name="sexo">
-                                        </div>
+                                                <div class="form-group">
+                                                        <label for="nombre">Nombre</label>
+                                                        <input readonly type="text" class="form-control" id="nombre" name="nombre">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="cedula">C&eacute;dula</label>
+                                                        <input readonly type="text" class="form-control" id="cedula" name="cedula">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="codigo">C&oacute;digo</label>
+                                                        <input readonly type="text" class="form-control" id="codigo" name="codigo">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="telefono">Tel&eacute;fono</label>
+                                                        <input readonly type="text" class="form-control" id="telefono" name="telefono">
+                                                </div>
                                         </div>
                                         <div class="col-md-4">
-                                        <div class="form-group">
-                                                <label for="salario">Salario</label>
-                                                <input readonly type="text" class="form-control" id="salario" name="salario">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="fecha_ingreso">Fecha de ingreso</label>
-                                                <input readonly class="form-control" type="text" id="fecha_ingreso" name="fecha_ingreso">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                                                <input readonly class="form-control" type="text" id="fecha_nacimiento" name="fecha_nacimiento">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="nacionalidad">Nacionalidad</label>
-                                                <input readonly type="text" class="form-control" id="nacionalidad" name="nacionalidad">
-                                        </div>
+                                                <div class="form-group">
+                                                        <label for="estado_civil">Estado Civil</label>
+                                                        <input readonly type="text" class="form-control" id="estado_civil" name="estado_civil">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="conyugue">Conyugue</label>
+                                                        <input readonly type="text" class="form-control" id="conyugue" name="conyugue">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="hijos">Numero de Hijos</label>
+                                                        <input readonly type="number" class="form-control" id="hijos" name="hijos">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="sexo">Sexo</label>
+                                                        <input readonly type="text" class="form-control" id="sexo" name="sexo">
+                                                </div>
                                         </div>
                                         <div class="col-md-4">
-                                        <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                <input readonly type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                                                <div class="form-group">
+                                                        <label for="salario">Ultimo Ingreso Semanal</label>
+                                                        <input readonly type="text" class="form-control" id="salario" name="salario">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="fecha_ingreso">Fecha de ingreso</label>
+                                                        <input readonly class="form-control" type="text" id="fecha_ingreso" name="fecha_ingreso">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                                                        <input readonly class="form-control" type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label for="nacionalidad">Nacionalidad</label>
+                                                        <input readonly type="text" class="form-control" id="nacionalidad" name="nacionalidad">
+                                                </div>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                <input readonly type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                                        <div class="col-md-4">
+                                                <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                        <input readonly type="checkbox" class="form-check-input" id="activo" name="activo">Activo</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                        <label class="form-check-label">
+                                                        <input readonly type="checkbox" class="form-check-input" id="liquidado" name="liquidado">Liquidado</label>
+                                                </div>
                                         </div>
+                                        <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label for="cta_banc">Cuenta Bancaria</label>
+                                                        <input type="text" class="form-control" id="cta_banc" name="cta_banc" readonly>
+                                                </div>
                                         </div>
-                                        <div class="col-md-8">
-                                        <div class="form-group">
-                                                <label for="cta_banc">Cuenta Bancaria</label>
-                                                <input readonly type="text" class="form-control" id="cta_banc" name="cta_banc">
+                                        <div class="col-md-2">
+                                                <div class="form-group">
+                                                        <label for="tipo_cuenta">Tipo de Cuenta</label>
+                                                        <input type="text" class="form-control" id="tipo_cuenta" name="tipo_cuenta" readonly>
+                                                </div>
                                         </div>
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        <label for="empresa">Empresa</label>
+                                                        <input type="text" class="form-control" id="empresa" name="empresa" readonly>
+                                                </div>
                                         </div>
                                         <div class="col-md-12 hayBeneficiarios">
                                                 <hr>
@@ -503,6 +528,17 @@ $(document).ready(function() {
                         $('#insertModal #empresa').html('');
                         $.each(res, function(index, value) {
                                 $('#insertModal #empresa').append('<option value="' + value.id + '">' + value.nombre + '</option>');
+                        });
+                }
+        });
+
+        $.ajax({
+                url: 'empresas/list',
+                method: 'GET',
+                success: function(res) {
+                        $('#insertModal #tipo_cuenta').html('');
+                        $.each(res, function(index, value) {
+                                $('#insertModal #tipo_cuenta').append('<option value="' + value.id + '">' + value.nombre + '</option>');
                         });
                 }
         });
@@ -640,12 +676,16 @@ function initButtons() {
         $('#editModal #fecha_nacimiento').attr('value', moment(empleado.fecha_nacimiento).format("YYYY-MM-DD"));
         $('#editModal #fecha_ingreso').attr('value', moment(empleado.fecha_ingreso).format("YYYY-MM-DD"));
         $('#editModal #hijos').val(empleado.hijos);
-        $('#editModal #sexo').val(empleado.sexo);
+        if(empleado.sexo === 'Masculino') {
+                $('#editModal #sexo').val('M');
+        } else if(empleado.sexo === 'Femenino') {
+                $('#editModal #sexo').val('F');                
+        }
         $('#editModal #estado_civil').val(empleado.estado_civil);
         $('#editModal #conyugue').val(empleado.conyugue);
+        $('#editModal #empresa').val(empleado.empresa);
         $('#editModal #activo').val(empleado.activo);
         $('#editModal #nacionalidad').val(empleado.nacionalidad);
-        $('#editModal #empresa').val(empleado.empresa);
         $('#editModal #liquidado').val(empleado.liquidado);
         if( empleado.activo == 1 ) {
         $('#editModal #activo').attr('checked', true);
@@ -741,7 +781,11 @@ function initButtons() {
         $('#viewModal #fecha_nacimiento').val(moment(empleado.fecha_nacimiento).format("DD-MM-YYYY"));
         $('#viewModal #fecha_ingreso').val(moment(empleado.fecha_ingreso).format("DD-MM-YYYY"));
         $('#viewModal #hijos').val(empleado.hijos);
-        $('#viewModal #sexo').val(empleado.sexo);
+        if(empleado.sexo == 'M') {
+                $('#viewModal #sexo').val('Masculino');
+        } else if(empleado.sexo == 'F') {
+                $('#viewModal #sexo').val('Femenino');                
+        }
         $('#viewModal #estado_civil').val(empleado.estado_civil);
         $('#viewModal #conyugue').val(empleado.conyugue);
         $('#viewModal #activo').val(empleado.activo);
@@ -757,6 +801,15 @@ function initButtons() {
         } else {
         $('#viewModal #liquidado').attr('checked', false);
         }
+
+        $.ajax({
+                url: 'empresas/find/' + empleado.empresa,
+                method: 'GET',
+                success: function(res) {
+                        $('#viewModal #empresa').val(res.nombre);
+                }
+        });
+
         $('#viewModal #beneficiarios').html('');
         $.ajax({
                 url: 'empleado/beneficiario/' + empleado.cedula,
