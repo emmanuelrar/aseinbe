@@ -33,6 +33,11 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('saldos/{id}', 'SaldosController@saldos')->name('saldos-empleado');
     });
 
+    Route::group(['prefix' => 'cuenta'], function() {
+        Route::get('tipos', 'TiposCuentaController@list')->name('tiposcuenta-empleado');
+        Route::get('find/{id}', 'TiposCuentaController@find')->name('find-tipocuenta');
+    });
+
     Route::group(['prefix' => 'aportes'], function() {
         Route::get('/', 'AportesController@index')->name('aportes');
         Route::get('registrar', 'AportesController@registrarAportes')->name('registrar-aportes');

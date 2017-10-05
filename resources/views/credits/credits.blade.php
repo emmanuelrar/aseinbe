@@ -3,9 +3,6 @@
 @section('style')
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <style>
-.mainContent {
-    padding-top: 0px !important;
-}
 select.form-control:not([size]):not([multiple])
 {
     height: calc(3.25rem + 2px) !important;
@@ -39,7 +36,7 @@ select.form-control:not([size]):not([multiple])
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
-                        <b>Asignaci&oacute;n de Creditos</b>
+                        <b>Realizar Prestamo</b>
                 </div>
                 <div class="card-block">
                 <table id="employee" class="table display" cellspacing="0" width="100%">
@@ -47,9 +44,8 @@ select.form-control:not([size]):not([multiple])
                         <tr>
                                 <th>Nombre</th>
                                 <th>Cédula</th>
-                                <th>Codigo</th>
-                                <th>Cuenta Bancaria</th>
-                                <th>Telefono</th>
+                                <th>Monto Disponible</th>
+                                <th>Monto Deuda</th>
                                 <th>Acciones</th>
                         </tr>
                         </thead>
@@ -58,9 +54,8 @@ select.form-control:not([size]):not([multiple])
                         <tr>
                                 <td>{{$empleado->nombre}}</td>
                                 <td>{{$empleado->cedula}}</td>
-                                <td>{{$empleado->codigo}}</td>
-                                <td>{{$empleado->cta_banc}}</td>
-                                <td>{{$empleado->telefono}}</td>
+                                <td>₡ {{number_format($empleado->aporte_obrero + $empleado->aporte_patron, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($empleado->prestamos, 2, ',', '.')}}</td>
                                 <td align="center">
                                         <button type="button" class="btn btn-info credito" data-toggle="modal" data-target="#modalCredito" data-empleado="{{$empleado}}"><i class="fa fa-university" aria-hidden="true"></i></button>
                                 </td>
@@ -72,26 +67,32 @@ select.form-control:not([size]):not([multiple])
         </div>
 </div>
 
-<!-- Modal Resumido -->
+<!-- Modal Simulador -->
 <div class="modal fade" id="modalCredito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content modal-lg">
         <div class="modal-header">
-                <h4 align="center">Aprobar Cr&eacute;dito</h4>
+                <h4 align="center">Aprobar Prestamo</h4>
         </div>
         <div class="modal-body">
                 <form id="formCredito">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                                 <p>Nombre: <u id="nombre"></u></p>
                         </div>
-                        <div class="col-md-4 text-center">
-                                <p>C&oacute;digo: <u id="codigo"></u></p>                                
+                        <div class="col-md-6 text-center">
+                                <p>Cedula: <u id="cedula"></u></p>                                
                         </div>
-                        <div class="col-md-4">
-                                <div class="form-group">
-                                        <label for="fecha">Fecha</label>
-                                        <input type="text" name="fecha" class="form-control"s id="fecha">
-                                </div>
+                        <div class="form-group col-md-4">
+                                <label for="monto">Monto</label>
+                                <input type="text" name="monto" class="form-control"s id="monto">
+                        </div>
+                        <div class="form-group col-md-4">
+                                <label for="interes">Interes</label>
+                                <input type="text" name="interes" class="form-control"s id="interes" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                                <label for="coutas">Cuotas</label>
+                                <input type="number" name="coutas" class="form-control"s id="coutas">
                         </div>
                 </form>
         </div>
@@ -130,7 +131,7 @@ function initButtons() {
         var empleado = button.data('empleado');
 
         $('#nombre').text(empleado.nombre);
-        $('#codigo').text(empleado.codigo);        
+        $('#cedula').text(empleado.cedula);        
 
         console.log(empleado);
     });

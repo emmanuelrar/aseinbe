@@ -32,6 +32,7 @@ class EmployeesController extends Controller
         $empleado->cedula = $request->input('cedula');
         $empleado->telefono = $request->input('telefono');
         $empleado->codigo = $request->input('codigo');
+        $empleado->tipo_cuenta = $request->input('tipo_cuenta');
         $empleado->cta_banc = $request->input('cta_banc');
         $empleado->salario = $request->input('salario');
         $empleado->estado_civil = $request->input('estado_civil');
@@ -89,6 +90,7 @@ class EmployeesController extends Controller
         $empleado->cedula = $request->input('cedula');
         $empleado->telefono = $request->input('telefono');
         $empleado->codigo = $request->input('codigo');
+        $empleado->tipo_cuenta = $request->input('tipo_cuenta');
         $empleado->cta_banc = $request->input('cta_banc');
         $empleado->salario = $request->input('salario');
         $empleado->estado_civil = $request->input('estado_civil');
