@@ -92,7 +92,7 @@ select.form-control:not([size]):not([multiple])
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="coutas">Cuotas</label>
-                                <input type="number" name="coutas" class="form-control"s id="coutas">
+                                <input type="number" name="coutas" class="form-control"s id="coutas" min="1" value="1">
                         </div>
                 </form>
         </div>
@@ -134,6 +134,10 @@ function initButtons() {
         $('#cedula').text(empleado.cedula);        
 
         console.log(empleado);
+    });
+
+    $('#monto').on('keyup', function() {
+        console.log($('#monto').val());
     });
 }
 
