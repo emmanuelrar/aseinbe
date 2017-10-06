@@ -7,7 +7,7 @@ use App\Empresas;
 
 class EmpresasController extends Controller
 {
-    public function list(Request $request) {
+    public function lista(Request $request) {
         if($request->ajax()) {
             $empresas = Empresas::all();
             

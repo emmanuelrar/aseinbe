@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::group(['prefix' => 'cuenta'], function() {
-        Route::get('tipos', 'TiposCuentaController@list')->name('tiposcuenta-empleado');
+        Route::get('tipos', 'TiposCuentaController@lista')->name('tiposcuenta-empleado');
         Route::get('find/{id}', 'TiposCuentaController@find')->name('find-tipocuenta');
     });
 
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'empresas'], function() {
         Route::get('/', 'EmpresasController@index')->name('empresas');
-        Route::get('list', 'EmpresasController@list')->name('lista-empresas');
+        Route::get('lista', 'EmpresasController@lista')->name('lista-empresas');
         Route::get('find/{id}', 'EmpresasController@find')->name('find-empresas');
         Route::post('insert', 'EmpresasController@insert')->name('insert-empresas');
         Route::post('update/{id}', 'EmpresasController@update')->name('update-empresas');
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::group(['prefix' => 'configuracion'], function() {
         Route::get('/', 'ConfiguracionController@index')->name('configuracion');
-        Route::get('list', 'ConfiguracionController@list')->name('list-configuracion');
+        Route::get('lista', 'ConfiguracionController@lista')->name('lista-configuracion');
         Route::post('update', 'ConfiguracionController@update')->name('update-configuracion');
     });
 

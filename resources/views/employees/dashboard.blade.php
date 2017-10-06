@@ -523,7 +523,7 @@ $(document).ready(function () {
         $('#insertModal').on('show.bs.modal', function (event) {
 
                 $.ajax({
-                        url: 'empresas/list',
+                        url: 'empresas/lista',
                         method: 'GET',
                         success: function (res) {
                                 $('#insertModal #empresa').html('');
@@ -655,7 +655,7 @@ function initButtons() {
         $('#editModal').on('show.bs.modal', function (event) {
 
                 $.ajax({
-                        url: 'empresas/list',
+                        url: 'empresas/lista',
                         method: 'GET',
                         success: function (res) {
                                 $('#editModal #empresa').html('');

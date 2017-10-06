@@ -25,8 +25,8 @@
                             <input type="number" class="form-control" value="{{$configuracion->porcen_aporte_patron}}" id="porcentaje_patron" name="porcentaje_patron">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="coutas_max">Maximo de Coutas</label>
-                            <input type="number" class="form-control" value="{{$configuracion->coutas_maximas}}" id="coutas_max" name="coutas_max">
+                            <label for="cuotas_max">Maximo de Coutas</label>
+                            <input type="number" class="form-control" value="{{$configuracion->cuotas_maximas}}" id="cuotas_max" name="cuotas_max">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="porcentaje_interes">Porcentaje de Interes Mensual</label>

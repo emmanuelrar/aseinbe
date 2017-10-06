@@ -22,7 +22,7 @@ select.form-control:not([size]):not([multiple])
 #company-title {
         font-size: 62px;
 }
-.roboto {
+.roboto input{
         font-family: 'Roboto';
 }
 .no-padding {
@@ -75,39 +75,44 @@ select.form-control:not([size]):not([multiple])
                 <h4 align="center">Analisis de Prestamo</h4>
         </div>
         <div class="modal-body">
-                <form id="formCredito">
+                <form id="formCredito" class="roboto">
                         {{ csrf_field() }}
-                        <div class="col-md-6">
-                                <p>Nombre: <u id="nombre"></u></p>
+                        <div class="row">
+                                <div class="col-md-6">
+                                        <p>Nombre: <u id="nombre"></u></p>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                        <p>Cedula: <u id="cedula_txt"></u></p>                                
+                                </div>
                         </div>
-                        <div class="col-md-6 text-center">
-                                <p>Cedula: <u id="cedula"></u></p>                                
+                        <input type="hidden" name="cedula" id="cedula">
+                        <div class="row">
+                                <div class="form-group col-md-4">
+                                        <label for="acumulado">Total Acumulado</label>
+                                        <input type="text" name="acumulado" class="form-control" id="acumulado" readonly>
+                                </div>
+                                <div class="form-group col-md-4">
+                                        <label for="deuda">Total Deuda</label>
+                                        <input type="text" name="deuda" class="form-control" id="deuda" readonly>
+                                </div>
+                                <div class="form-group col-md-4">
+                                        <label for="disponible">Disponible</label>
+                                        <input type="text" name="disponible" class="form-control" id="disponible" readonly>
+                                </div>
                         </div>
-
-                        <div class="form-group col-md-4">
-                                <label for="acumulado">Total Acumulado</label>
-                                <input type="text" name="acumulado" class="form-control" id="acumulado" readonly>
-                        </div>
-                        <div class="form-group col-md-4">
-                                <label for="deuda">Total Deuda</label>
-                                <input type="text" name="deuda" class="form-control" id="deuda" readonly>
-                        </div>
-                        <div class="form-group col-md-4">
-                                <label for="disponible">Disponible</label>
-                                <input type="text" name="disponible" class="form-control" id="disponible" readonly>
-                        </div>
-
                         <div class="form-group col-md-4">
                                 <label for="monto">Monto</label>
-                                <input type="number" name="monto" class="form-control" id="monto">
+                                <input type="number" name="monto" class="form-control" id="monto" min="1">
                         </div>
                         <div class="form-group col-md-4">
-                                <label for="interes">Interes Mensual</label>
-                                <input type="text" name="interes" class="form-control" id="interes" readonly>
+                                <label for="interes_txt">Interes Mensual</label>
+                                <input type="text" name="interes_txt" class="form-control" id="interes_txt" readonly>
+                                <input type="hidden" name="interes" class="form-control" id="interes" readonly>                                
                         </div>
                         <div class="form-group col-md-4">
-                                <label for="total_deuda">Total a Pagar</label>
-                                <input type="text" name="total_deuda" class="form-control" id="total_deuda" readonly>
+                                <label for="total_deuda_txt">Total a Pagar</label>
+                                <input type="text" name="total_deuda_txt" class="form-control" id="total_deuda_txt" readonly>
+                                <input type="hidden" name="total_deuda" class="form-control" id="total_deuda" readonly>
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="cuotas">Numero de Cuotas (Semanas)</label>
@@ -115,7 +120,8 @@ select.form-control:not([size]):not([multiple])
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="monto_cuotas">Monto de Cuotas Mensuales</label>
-                                <input type="text" name="monto_cuotas" class="form-control" id="monto_cuotas" readonly>
+                                <input type="text" name="monto_cuotas_txt" class="form-control" id="monto_cuotas_txt" readonly>
+                                <input type="hidden" name="monto_cuotas" class="form-control" id="monto_cuotas" readonly>
                         </div>
                 </form>
         </div>
@@ -151,7 +157,7 @@ $(document).ready(function() {
         });
 
         $.ajax({
-                url: '../configuracion/list',
+                url: 'configuracion/lista',
                 method: 'GET',
                 success: function(res) {
                         porcentajeInteres = res.porcen_interes;
@@ -162,7 +168,31 @@ $(document).ready(function() {
         });
 
         $('.approve').on('click', function() {
-                
+                parseFloat($('#total_deuda').val());
+                parseFloat($('#monto_cuotas').val());
+                console.log($('#total_deuda').val());
+                console.log($('#monto_cuotas').val());
+                $.ajax({
+                        url: 'prestamos/insert',
+                        method: 'POST',
+                        data: $('#formCredito').serialize(),
+                        success: function(res) {
+                                swal(
+                                        'Prestamo realizado.',
+                                        'Se ha asignado el prestamo al empleado.',
+                                        'success'
+                                ).then(function () {
+                                        location.reload();
+                                });
+                        },
+                        error: function() {
+                                swal(
+                                        'Error.',
+                                        'Se ha generado un error al conectar con el servidor. Intente nuevamente.',
+                                        'error'
+                                );
+                        }
+                });
         });
 });
 
@@ -172,14 +202,16 @@ function initButtons() {
         var button = $(event.relatedTarget);
         var empleado = button.data('empleado');
 
-        $('#monto').val('0');
+        $('#acumulado').val('0');
         $('#interes').val('0');
-        $('#monto_cuotas').val('0');
         $('#total_deuda').val('0');
+        $('#monto').val('0');
+        $('#monto_cuotas').val('0');
         $('#cuotas').val('1');
 
         $('#nombre').text(empleado.nombre);
-        $('#cedula').text(empleado.cedula);
+        $('#cedula').val(empleado.cedula);
+        $('#cedula_txt').text(empleado.cedula);
 
         $('#acumulado').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron)).toLocaleString());
         $('#deuda').val('₡' + parseFloat(empleado.prestamos).toLocaleString());
@@ -203,10 +235,17 @@ function initButtons() {
                 $('#monto').val(totalDisponible);
         }
 
-        $('#interes').val( (parseFloat($('#monto').val()) * (porcentajeInteres/100)).toLocaleString() );
+        var monto = parseFloat($('#monto').val());
+        var interes = monto * (porcentajeInteres/100);
+        var cuotas = parseInt($('#cuotas').val());
 
-        $('#monto_cuotas').val( (parseFloat($('#monto').val()) / parseInt($('#cuotas').val())).toLocaleString() );
-        $('#total_deuda').val( (parseFloat($('#monto').val()) + (parseFloat($('#monto').val()) * (porcentajeInteres/100))).toLocaleString() );
+        $('#interes_txt').val('₡ ' + interes.toLocaleString() );
+        $('#monto_cuotas_txt').val('₡ ' + ((monto + interes) / cuotas).toLocaleString() );
+        $('#total_deuda_txt').val('₡ ' + (monto + interes).toLocaleString() );
+
+        $('#interes').val( interes );
+        $('#monto_cuotas').val( (monto + interes) / cuotas );
+        $('#total_deuda').val( monto + interes );
     }
 }
 

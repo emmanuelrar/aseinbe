@@ -7,8 +7,7 @@ use App\Configuracion;
 
 class ConfiguracionController extends Controller
 {
-
-    public function list(Request $request) {
+    public function lista(Request $request) {
         if($request->ajax()) {
             $configuracion = Configuracion::first();
             
@@ -28,7 +27,7 @@ class ConfiguracionController extends Controller
         $configuracion->porcen_interes = $request->input('porcentaje_interes');
         $configuracion->porcen_aporte_obrero = $request->input('porcentaje_obrero');
         $configuracion->porcen_aporte_patron = $request->input('porcentaje_patron');
-        $configuracion->coutas_maximas = $request->input('coutas_max');
+        $configuracion->cuotas_maximas = $request->input('cuotas_max');
         $configuracion->save();
 
         return response()->json(['message' => 'success']);

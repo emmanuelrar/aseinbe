@@ -8,7 +8,7 @@ use App\TiposCuenta;
 class TiposCuentaController extends Controller
 {
 
-    public function list(Request $request) {
+    public function lista(Request $request) {
         if($request->ajax()) {
             $tiposcuenta = TiposCuenta::all();
             
