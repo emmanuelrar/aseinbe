@@ -31,13 +31,14 @@ class AportesController extends Controller
             $configuracion = Configuracion::first();
     
             for($i = 0; $i < count($empleados); $i++) {
-                $aportes = new Aportes();
-                $aportes->cedula_empleado = $empleados[$i]->cedula;
-                $aportes->fecha = Carbon::now();
-                $aportes->aporte_obrero = $empleados[$i]->salario * $configuracion->porcen_aporte_obrero / 100;
-                $aportes->aporte_patron = $empleados[$i]->salario * $configuracion->porcen_aporte_patron / 100;
-                $aportes->tipo = 'CT';
-                $aportes->save();
+                if($empleados[$i]->salario > 0) {
+                    $aportes = new Aportes();
+                    $aportes->cedula_empleado = $empleados[$i]->cedula;
+                    $aportes->fecha = Carbon::now();
+                    $aportes->aporte_obrero = $empleados[$i]->salario * $configuracion->porcen_aporte_obrero / 100;
+                    $aportes->aporte_patron = $empleados[$i]->salario * $configuracion->porcen_aporte_patron / 100;
+                    $aportes->save();
+                }
             }
         }
     }
