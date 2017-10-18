@@ -187,6 +187,7 @@ $('#employee').DataTable({
 $(document).ready(function() {
 
         $('.registrar-aportes').on('click', function() {
+                $('.registrar-aportes').attr('disabled');
                 swal({
                 title: '¿Estas seguro(a)?',
                 text: "Este cambio no podra revertirse.",
@@ -207,6 +208,7 @@ $(document).ready(function() {
                                 ).then(function () {
                                         location.reload();
                                 });
+                                $('.registrar-aportes').removeAttr('disabled');
                         },
                         error: function() {
                                 swal(
@@ -214,8 +216,12 @@ $(document).ready(function() {
                                 'Ha ocurrido un error al conectar con el servidor.',
                                 'error'
                                 ); 
+                                $('.registrar-aportes').removeAttr('disabled');
                         }
                         });
+                },
+                function(dismiss) {
+                        $('.registrar-aportes').removeAttr('disabled');
                 });
         });
 });

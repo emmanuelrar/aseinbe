@@ -39,9 +39,9 @@ select.form-control:not([size]):not([multiple])
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
-                        <b>Registro de Aportes</b>
+                        <b>Registro de Pagos/Cuotas</b>
                         <div style="float: right;">
-                                <button type="button" class="btn btn-primary registrar-aportes" data-toggle="modal" data-target="#insertModal"> Registrar Aportes <i class="fa fa-balance-scale" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary registrar-pagos" data-toggle="modal" data-target="#insertModal"> Registrar Pagos <i class="fa fa-balance-scale" aria-hidden="true"></i></button>
                         </div>
                 </div>
                 <div class="card-block">
@@ -49,22 +49,24 @@ select.form-control:not([size]):not([multiple])
                         <thead>
                         <tr>
                                 <th>Nombre</th>
-                                <th>Cédula</th>
-                                <th>Aporte Obrero</th>
-                                <th>Aporte Patron</th>
-                                <th>Fecha</th>
-                                <th>Tipo</th>
+                                <th>fecha</th>
+                                <th>Monto Cuota</th>
+                                <th>Monto Restante</th>
+                                <th>Cuotas Restantes</th>
+                                <th>Amortizado</th>
+                                <th>Interes</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($aportes as $aporte)
+                        @foreach($pagos as $pago)
                         <tr>
-                                <td>{{$aporte->nombre}}</td>
-                                <td class="roboto">{{$aporte->cedula}}</td>
-                                <td class="roboto">₡ {{number_format($aporte->aporte_obrero, 2, ',', '.')}}</td>
-                                <td class="roboto">₡ {{number_format($aporte->aporte_patron, 2, ',', '.')}}</td>
-                                <td>{{$aporte->fecha}}</td>
-                                <td>{{$aporte->tipo}}</td>                                
+                                <td>{{$pago->nombre}}</td>
+                                <td class="roboto">{{$pago->fecha}}</td>
+                                <td class="roboto">₡ {{number_format($pago->monto_cuotas, 2, ',', '.')}}</td>
+                                <td class="roboto">₡ {{number_format($pago->monto_restante, 2, ',', '.')}}</td>
+                                <td class="roboto">{{$pago->cuotas_restantes}}</td>
+                                <td class="roboto">₡ {{number_format($pago->amortizado, 2, ',', '.')}}</td>
+                                <td class="roboto">₡ {{number_format($pago->interes, 2, ',', '.')}}</td>
                         </tr>
                         @endforeach
                         </tbody>
@@ -80,10 +82,47 @@ select.form-control:not([size]):not([multiple])
 <script>
 
 $('#employee').DataTable({
-   "lengthChange": false,
-   "fnDrawCallback": function() {
-        initButtons();
-    }
+   "lengthChange": false
+});
+
+$(document).ready(function() {
+        $('.registrar-pagos').on('click', function() {
+                swal({
+                title: '¿Estas seguro(a)?',
+                text: "Este cambio no podra revertirse.",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Registrar pagos'
+                }).then(function () {
+                        $.ajax({
+                        url: 'pagar',
+                        method: 'GET',
+                        success: function() {
+                                swal(
+                                'Pagos registrados',
+                                'Los pagos han sido cargados con exito.',
+                                'success'
+                                ).then(function () {
+                                        location.reload();
+                                });
+                                $('.registrar-pagos').removeAttr('disabled');
+                        },
+                        error: function() {
+                                swal(
+                                'Error.',
+                                'Ha ocurrido un error al conectar con el servidor.',
+                                'error'
+                                ); 
+                                $('.registrar-pagos').removeAttr('disabled');
+                        }
+                        });
+                },
+                function(dismiss) {
+                        $('.registrar-pagos').removeAttr('disabled');
+                });
+        });
 });
 
 </script>

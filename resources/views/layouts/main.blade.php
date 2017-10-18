@@ -98,7 +98,7 @@
                                     <ul class="sub-menu collapse" id="prestamos">
                                         <li><a href="{{route('lista-prestamos')}}"> Listado </a></li>
                                         <li><a href="{{route('prestamos')}}"> Nuevo Prestamo </a></li>
-                                        <li><a href="{{route('pago-prestamos')}}"> Registro de Pagos/Cuotas </a></li>
+                                        <li><a href="{{route('pagos')}}"> Registro de Pagos/Cuotas </a></li>
                                     </ul>
                                 </ul>
                         </div>
