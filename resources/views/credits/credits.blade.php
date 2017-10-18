@@ -105,7 +105,7 @@ select.form-control:not([size]):not([multiple])
                                 <input type="number" name="monto" class="form-control" id="monto" min="1">
                         </div>
                         <div class="form-group col-md-4">
-                                <label for="interes_txt">Interes Mensual</label>
+                                <label for="interes_txt">Interes</label>
                                 <input type="text" name="interes_txt" class="form-control" id="interes_txt" readonly>
                                 <input type="hidden" name="interes" class="form-control" id="interes" readonly>                                
                         </div>
@@ -119,7 +119,7 @@ select.form-control:not([size]):not([multiple])
                                 <input type="number" name="cuotas" class="form-control" id="cuotas" min="1" max="" value="1">
                         </div>
                         <div class="form-group col-md-4">
-                                <label for="monto_cuotas">Monto de Cuotas Mensuales</label>
+                                <label for="monto_cuotas">Monto de Cuotas Semanales</label>
                                 <input type="text" name="monto_cuotas_txt" class="form-control" id="monto_cuotas_txt" readonly>
                                 <input type="hidden" name="monto_cuotas" class="form-control" id="monto_cuotas" readonly>
                         </div>

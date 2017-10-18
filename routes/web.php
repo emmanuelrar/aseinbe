@@ -55,6 +55,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'prestamos'], function() {
         Route::get('/', 'PrestamosController@index')->name('prestamos');
         Route::post('insert', 'PrestamosController@insert')->name('insert-prestamos');
+        Route::get('lista', 'PrestamosController@lista')->name('lista-prestamos');
+        Route::get('lista/{id}', 'PrestamosController@obtenerPrestamos')->name('obtener-prestamos');
+        Route::get('pago', 'PrestamosController@pago')->name('pago-prestamos');        
     });
 
     Route::group(['prefix' => 'estados'], function() {

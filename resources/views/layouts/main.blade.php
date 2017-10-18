@@ -91,12 +91,15 @@
                                     <i class="fa fa-cog fa-lg"></i> Configuracion 
                                     </a>
                                     </li>
-                    
-                                    <li>
-                                    <a href="{{ route('prestamos') }}">
-                                    <i class="fa fa-money" aria-hidden="true"></i> Prestamos 
-                                    </a>
-                                    </li>
+
+                                    <li data-toggle="collapse" data-target="#prestamos" class="collapsed">
+                                        <a href="#"><i class="fa fa-users fa-lg" aria-hidden="true"></i> Prestamos <span class="arrow"></span></a>
+                                    </li>  
+                                    <ul class="sub-menu collapse" id="prestamos">
+                                        <li><a href="{{route('lista-prestamos')}}"> Listado </a></li>
+                                        <li><a href="{{route('prestamos')}}"> Nuevo Prestamo </a></li>
+                                        <li><a href="{{route('pago-prestamos')}}"> Registro de Pagos/Cuotas </a></li>
+                                    </ul>
                                 </ul>
                         </div>
                     </div>
@@ -147,7 +150,16 @@
                     $('#menu-content li:contains("Estados de Cuenta")').addClass('active');
                 break;
             case 'prestamos':
-                    $('#menu-content li:contains("Prestamos")').addClass('active');
+                    $('#menu-content li:contains("Prestamos")').parent().prev().addClass('active');            
+                    $('#menu-content li:contains("Realizar Prestamo")').addClass('active');
+                break;
+            case 'lista-prestamos':
+                    $('#menu-content li:contains("Prestamos")').parent().prev().addClass('active');            
+                    $('#menu-content li:contains("Prestamos Otorgados")').addClass('active');
+                break;
+            case 'pago-prestamos':
+                    $('#menu-content li:contains("Prestamos")').parent().prev().addClass('active');            
+                    $('#menu-content li:contains("Cobro de Cuotas")').addClass('active');
                 break;
             case 'empresas':
                     $('#menu-content li:contains("Empresas")').addClass('active');

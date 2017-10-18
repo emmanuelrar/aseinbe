@@ -56,7 +56,7 @@ select.form-control:not([size]):not([multiple])
                                                 <td align="center">
                                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#viewModal" data-empleado="{{$empleado}}"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-empleado="{{$empleado}}"><i class="fa fa-pencil-square fa-lg text-white" aria-hidden="true"></i></button>
-                                                        <button type="button" class="btn btn-danger delete" data-codigo="{{$empleado->codigo}}"><i class="fa fa-trash fa-lg text-white" aria-hidden="true"></i></button>
+                                                        <button type="button" class="btn btn-danger delete" data-codigo="{{$empleado->cedula}}"><i class="fa fa-trash fa-lg text-white" aria-hidden="true"></i></button>
                                                 </td>
                                         </tr>
                                         @endforeach
