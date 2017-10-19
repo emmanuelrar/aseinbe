@@ -35,8 +35,8 @@ class PagosController extends Controller
                 $pagos->prestamos_id = $value->id;
                 $pagos->cuota = $value->monto_cuotas;
                 $pagos->numero_cuota = ($value->cuotas - $value->cuotas_restantes) + 1;
-                $pagos->amortizado = 0;
-                $pagos->interes = 0;
+                $pagos->amortizado = $value->monto_cuotas - ($value->monto_interes / $value->cuotas);
+                $pagos->interes = ($value->monto_interes / $value->cuotas);
                 $pagos->save();
             }
 

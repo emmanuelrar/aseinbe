@@ -18,7 +18,10 @@ class ConfiguracionController extends Controller
     public function index() {
         $configuracion = Configuracion::first();
 
-        return view('configuracion.configuracion', compact('configuracion'));
+        $recaudacion = Recaudacion::orderBy('año', 'DESC')
+        ->first();
+
+        return view('configuracion.configuracion', compact('configuracion', 'recaudacion'));
     }
 
     public function update(Request $request) {

@@ -11,6 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     @yield('style')
     <!-- Styles -->
+    <style>
+    .card {
+        margin: 10px 0px;
+    }
+    @media (max-width: 1326px) {
+        .card {
+            margin: 10px 50px;
+        }
+    }
+    </style>
     <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/datatables.net-dt/css/jquery.dataTables.css') }}" rel="stylesheet">

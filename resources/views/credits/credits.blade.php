@@ -116,7 +116,7 @@ select.form-control:not([size]):not([multiple])
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="cuotas">Numero de Cuotas (Semanas)</label>
-                                <input type="number" name="cuotas" class="form-control" id="cuotas" min="1" max="" value="1">
+                                <input type="number" name="cuotas" class="form-control" id="cuotas" min="1" value="1">
                         </div>
                         <div class="form-group col-md-4">
                                 <label for="monto_cuotas">Monto de Cuotas Semanales</label>
@@ -170,8 +170,6 @@ $(document).ready(function() {
         $('.approve').on('click', function() {
                 parseFloat($('#total_deuda').val());
                 parseFloat($('#monto_cuotas').val());
-                console.log($('#total_deuda').val());
-                console.log($('#monto_cuotas').val());
                 $.ajax({
                         url: 'prestamos/insert',
                         method: 'POST',
@@ -213,9 +211,9 @@ function initButtons() {
         $('#cedula').val(empleado.cedula);
         $('#cedula_txt').text(empleado.cedula);
 
-        $('#acumulado').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron)).toLocaleString());
-        $('#deuda').val('₡' + parseFloat(empleado.prestamos).toLocaleString());
-        $('#disponible').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) - parseFloat(empleado.prestamos)).toLocaleString());
+        $('#acumulado').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron)).toLocaleString(undefined, {minimumFractionDigits: 2}));
+        $('#deuda').val('₡' + parseFloat(empleado.prestamos).toLocaleString(undefined, {minimumFractionDigits: 2}));
+        $('#disponible').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) - parseFloat(empleado.prestamos)).toLocaleString(undefined, {minimumFractionDigits: 2}));
         
         totalDisponible = parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) - parseFloat(empleado.prestamos);
         
@@ -236,12 +234,13 @@ function initButtons() {
         }
 
         var monto = parseFloat($('#monto').val());
-        var interes = monto * (porcentajeInteres/100);
         var cuotas = parseInt($('#cuotas').val());
+        var porcentaje_interes = (porcentajeInteres / 100) / 52 * cuotas;
+        var interes = parseFloat(monto * porcentaje_interes);
 
-        $('#interes_txt').val('₡ ' + interes.toLocaleString() );
-        $('#monto_cuotas_txt').val('₡ ' + ((monto + interes) / cuotas).toLocaleString() );
-        $('#total_deuda_txt').val('₡ ' + (monto + interes).toLocaleString() );
+        $('#interes_txt').val('₡ ' + interes.toLocaleString(undefined, {minimumFractionDigits: 2}) );
+        $('#monto_cuotas_txt').val('₡ ' + ((monto + interes) / cuotas).toLocaleString(undefined, {minimumFractionDigits: 2}) );
+        $('#total_deuda_txt').val('₡ ' + (monto + interes).toLocaleString(undefined, {minimumFractionDigits: 2}) );
 
         $('#interes').val( interes );
         $('#monto_cuotas').val( (monto + interes) / cuotas );

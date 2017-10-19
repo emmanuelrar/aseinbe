@@ -11,6 +11,32 @@
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
+                        <b>Año de Recaudacion Actual</b>
+                </div>
+                <div class="card-block">
+                    <table id="years" class="table display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Monto Capitalizado</th>
+                            <th>Fecha Inicio</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{$recaudacion->año}}</td>
+                            <td>{{$recaudacion->monto_capitalizado}}</td>
+                            <td>{{$recaudacion->fecha_inicio}}<</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+</div>
+
+<div class="col-md-12">
+        <div class="card">
+                <div class="card-header bg-info text-white">
                         <b>Configuracion de Empresa</b>
                 </div>
                 <div class="card-block">
@@ -29,7 +55,7 @@
                             <input type="number" class="form-control" value="{{$configuracion->cuotas_maximas}}" id="cuotas_max" name="cuotas_max">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="porcentaje_interes">Porcentaje de Interes Mensual</label>
+                            <label for="porcentaje_interes">Porcentaje de Interes Anual</label>
                             <input type="number" class="form-control" value="{{$configuracion->porcen_interes}}" id="porcentaje_interes" name="porcentaje_interes">
                         </div>
                         <div class="col-md-12 text-center">
@@ -43,33 +69,37 @@
 
 @push('script')
 <script>
-    $(document).ready(function() {
-        
-        $('.update').on('click', function() {
-            console.log('Hola Mundo!');
-            $.ajax({
-                url: 'configuracion/update',
-                method: 'POST',
-                data: $('#updateConfiguration').serialize(),
-                success: function() {
-                    swal(
-                        'Datos modificados.',
-                        'Los datos han sido actualizados.',
-                        'success'
-                        ).then(function () {
-                                location.reload();
-                    });
-                },
-                error: function() {
-                    swal(
-                        'Error.',
-                        'Ha ocurrido un error al conectar con la aplicacion.',
-                        'error'
-                        );
-                }
-            });
-        });
+$('#years').DataTable({
+   "lengthChange": false
+});
 
+$(document).ready(function() {
+    
+    $('.update').on('click', function() {
+        console.log('Hola Mundo!');
+        $.ajax({
+            url: 'configuracion/update',
+            method: 'POST',
+            data: $('#updateConfiguration').serialize(),
+            success: function() {
+                swal(
+                    'Datos modificados.',
+                    'Los datos han sido actualizados.',
+                    'success'
+                    ).then(function () {
+                            location.reload();
+                });
+            },
+            error: function() {
+                swal(
+                    'Error.',
+                    'Ha ocurrido un error al conectar con la aplicacion.',
+                    'error'
+                    );
+            }
+        });
     });
+
+});
 </script>
 @endpush
