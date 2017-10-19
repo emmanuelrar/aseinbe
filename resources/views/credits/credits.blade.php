@@ -54,7 +54,7 @@ select.form-control:not([size]):not([multiple])
                         <tr>
                                 <td>{{$empleado->nombre}}</td>
                                 <td>{{$empleado->cedula}}</td>
-                                <td>₡ {{number_format($empleado->aporte_obrero + $empleado->aporte_patron, 2, ',', '.')}}</td>
+                                <td>₡ {{number_format($empleado->aporte_obrero + $empleado->aporte_patron + $empleado->capitalizado, 2, ',', '.')}}</td>
                                 <td>₡ {{number_format($empleado->prestamos, 2, ',', '.')}}</td>
                                 <td align="center">
                                         <button type="button" class="btn btn-info credito" data-toggle="modal" data-target="#modalCredito" data-empleado="{{$empleado}}"><i class="fa fa-university" aria-hidden="true"></i></button>
@@ -211,11 +211,11 @@ function initButtons() {
         $('#cedula').val(empleado.cedula);
         $('#cedula_txt').text(empleado.cedula);
 
-        $('#acumulado').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron)).toLocaleString(undefined, {minimumFractionDigits: 2}));
+        $('#acumulado').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) + parseFloat(empleado.capitalizado)).toLocaleString(undefined, {minimumFractionDigits: 2}));
         $('#deuda').val('₡' + parseFloat(empleado.prestamos).toLocaleString(undefined, {minimumFractionDigits: 2}));
-        $('#disponible').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) - parseFloat(empleado.prestamos)).toLocaleString(undefined, {minimumFractionDigits: 2}));
+        $('#disponible').val('₡' + (parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) + parseFloat(empleado.capitalizado) - parseFloat(empleado.prestamos)).toLocaleString(undefined, {minimumFractionDigits: 2}));
         
-        totalDisponible = parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) - parseFloat(empleado.prestamos);
+        totalDisponible = parseFloat(empleado.aporte_obrero) + parseFloat(empleado.aporte_patron) + parseFloat(empleado.capitalizado) - parseFloat(empleado.prestamos);
         
     });
 

@@ -11,32 +11,6 @@
 <div class="col-md-12">
         <div class="card">
                 <div class="card-header bg-info text-white">
-                        <b>Año de Recaudacion Actual</b>
-                </div>
-                <div class="card-block">
-                    <table id="years" class="table display" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Año</th>
-                            <th>Monto Capitalizado</th>
-                            <th>Fecha Inicio</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{$recaudacion->año}}</td>
-                            <td>{{$recaudacion->monto_capitalizado}}</td>
-                            <td>{{$recaudacion->fecha_inicio}}<</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-        </div>
-</div>
-
-<div class="col-md-12">
-        <div class="card">
-                <div class="card-header bg-info text-white">
                         <b>Configuracion de Empresa</b>
                 </div>
                 <div class="card-block">
@@ -70,7 +44,11 @@
 @push('script')
 <script>
 $('#years').DataTable({
-   "lengthChange": false
+   "lengthChange": false,
+   "searching": false,
+   "ordering": false,
+   paging: false,
+   info: false
 });
 
 $(document).ready(function() {

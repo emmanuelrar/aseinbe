@@ -72,6 +72,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('update', 'ConfiguracionController@update')->name('update-configuracion');
     });
 
+    Route::group(['prefix' => 'recaudacion'], function() {
+        Route::get('/', 'RecaudacionController@index')->name('recaudacion');        
+    });
+
     Route::group(['prefix' => 'reporte'], function() {
         Route::get('captura', 'ReportsController@captura')->name('captura-planilla');
         Route::get('prestamos/{from?}/{to?}', 'ReportsController@prestamos')->name('reporte-prestamos');

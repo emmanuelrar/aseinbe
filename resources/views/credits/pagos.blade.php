@@ -82,7 +82,10 @@ select.form-control:not([size]):not([multiple])
 <script>
 
 $('#employee').DataTable({
-   "lengthChange": false
+   "lengthChange": false,
+   "language": {
+      "emptyTable": "No se han realizado pagos de cuotas."
+    }
 });
 
 $(document).ready(function() {

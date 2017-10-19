@@ -38,6 +38,7 @@ class EmployeesController extends Controller
         $empleado->estado_civil = $request->input('estado_civil');
         $empleado->fecha_nacimiento = Carbon::parse($request->input('fecha_nacimiento'));
         $empleado->fecha_ingreso = Carbon::parse($request->input('fecha_ingreso'));
+        $empleado->fecha_salida = Carbon::parse($request->input('fecha_salida'));
         $empleado->nacionalidad = $request->input('nacionalidad');
         $empleado->activo = !is_null($request->input('activo')) ? '1' : '0';
         $empleado->liquidado = !is_null($request->input('liquidado')) ? '1' : '0';

@@ -102,6 +102,12 @@
                                     </a>
                                     </li>
 
+                                    <li>
+                                    <a href="{{route('recaudacion')}}">
+                                    <i class="fa fa-usd fa-lg"></i> Recaudacion 
+                                    </a>
+                                    </li>
+
                                     <li data-toggle="collapse" data-target="#prestamos" class="collapsed">
                                         <a href="#"><i class="fa fa-users fa-lg" aria-hidden="true"></i> Prestamos <span class="arrow"></span></a>
                                     </li>  

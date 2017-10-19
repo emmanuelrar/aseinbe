@@ -94,6 +94,9 @@ $('#employee').DataTable({
    "lengthChange": false,
    "fnDrawCallback": function() {
         initButtons();
+    },
+    "language": {
+      "emptyTable": "No se han realizado prestamos."
     }
 });
 

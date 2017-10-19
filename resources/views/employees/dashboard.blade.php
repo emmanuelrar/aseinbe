@@ -127,9 +127,13 @@ select.form-control:not([size]):not([multiple])
                                                                 <label for="salario">Ultimo Ingreso Semanal</label>
                                                                 <input type="text" class="form-control" id="salario" name="salario" required>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group col-md-6">
                                                                 <label for="fecha_ingreso">Fecha de ingreso</label>
                                                                 <input class="form-control" type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                                <label for="fecha_salida">Fecha de salida</label>
+                                                                <input class="form-control" type="date" id="fecha_salida" name="fecha_salida" required>
                                                         </div>
                                                         <div class="form-group">
                                                                 <label for="fecha_nacimiento">Fecha de nacimiento</label>
@@ -446,19 +450,25 @@ select.form-control:not([size]):not([multiple])
                                                                 </form>
                                                         </div>
                                                         <div class="tab-pane fade active" id="nav-balance" role="tabpanel" aria-labelledby="nav-balance-tab">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                         <div class="form-group">
                                                                                 <label for="aporte_empleado">Aporte Empleado</label>
                                                                                 <input readonly type="text" class="form-control" id="aporte_empleado" name="aporte_empleado">
                                                                         </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                         <div class="form-group">
                                                                                 <label for="aporte_patron">Aporte Patrono</label>
                                                                                 <input readonly type="text" class="form-control" id="aporte_patron" name="aporte_patron">
                                                                         </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
+                                                                        <div class="form-group">
+                                                                                <label for="capitalizado">Capitalizado </label>
+                                                                                <input readonly type="text" class="form-control" id="capitalizado" name="capitalizado">
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-md-3">
                                                                         <div class="form-group">
                                                                                 <label for="total">Total </label>
                                                                                 <input readonly type="text" class="form-control" id="total" name="total">
@@ -687,6 +697,7 @@ function initButtons() {
                 $('#editModal #telefono').val(empleado.telefono);
                 $('#editModal #fecha_nacimiento').attr('value', moment(empleado.fecha_nacimiento).format("YYYY-MM-DD"));
                 $('#editModal #fecha_ingreso').attr('value', moment(empleado.fecha_ingreso).format("YYYY-MM-DD"));
+                $('#editModal #fecha_salida').attr('value', moment(empleado.fecha_salida).format("YYYY-MM-DD"));
                 $('#editModal #hijos').val(empleado.hijos);
                 if (empleado.sexo === 'Masculino') {
                         $('#editModal #sexo').val('M');
@@ -860,7 +871,8 @@ function initButtons() {
                         success: function (data) {
                                 $('#viewModal #aporte_empleado').val('₡ ' + parseFloat(data[0].aporte_obrero).toLocaleString());
                                 $('#viewModal #aporte_patron').val('₡ ' + parseFloat(data[0].aporte_patron).toLocaleString());
-                                $('#viewModal #total').val('₡ ' + (parseFloat(data[0].aporte_obrero) + parseFloat(data[0].aporte_patron)).toLocaleString());
+                                $('#viewModal #capitalizado').val('₡ ' + parseFloat(data[0].capitalizado).toLocaleString());
+                                $('#viewModal #total').val('₡ ' + (parseFloat(data[0].aporte_obrero) + parseFloat(data[0].aporte_patron) + parseFloat(data[0].capitalizado)).toLocaleString());
                         }
                 });
         });
